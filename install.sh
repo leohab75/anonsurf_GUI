@@ -2,6 +2,8 @@
 
 #подготовим почву)
 rm -rf /tmp/anonsurf
+rm -f /home/$USER/'Рабочий стол'/anonsurf.desktop
+
 
 #перемещаем рабочие файлы во временный каталог
 mkdir /tmp/anonsurf
