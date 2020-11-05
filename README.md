@@ -7,11 +7,11 @@
 
 для установки нужно скачать
 
-sudo apt install git
+sudo apt install git curl
 
 git clone https://github.com/leohab75/anonsurf_GUI.git
 
-cd anonsurf_GUI/ && sh anon_Gui.sh
+cd anonsurf_GUI/ && sh preInstall.sh
 
 
 
