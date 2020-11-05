@@ -3,6 +3,6 @@ Type=Application,NetWork
 Encoding=UTF-8
 Name=Anonsurf
 Comment=darknet
-Exec=~/anonsurf/anon.sh %f
+Exec=exec sh ~/anonsurf/anon.sh %f
 Icon=~/anonsurf/anon/anon.png 
 Terminal=false

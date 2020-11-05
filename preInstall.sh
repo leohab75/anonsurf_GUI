@@ -1,7 +1,6 @@
 #!/bin/bash
 
-if [[ -n $(cat /etc/os-release |grep ubuntu) ]]
-then
+if [[ -n $(cat /etc/os-release |grep ubuntu) ]]; then
       pkexec sudo apt-add-repository ppa:i2p-maintainers/i2p
 
 else 
@@ -37,7 +36,7 @@ cp remove.sh ~/anonsurf
 icon=$(zenity --question --text="Установить ярлык на рабочий стол ?"\
        --width=300 --height=100)
 
-    if [[ $icon == 0 ]]; then
+    if [[ $icon = 0 ]]; then
        cp ~/.local/share/applications/anonsurf.desktop  ~/'Рабочий стол'
     fi
 
