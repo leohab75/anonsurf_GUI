@@ -4,6 +4,6 @@ Categories=Network
 Encoding=UTF-8
 Name=Anonsurf
 Comment=darknet
-Exec=/opt/anonsurf/anon.sh %f
+Exec=/opt/anonsurf/remove.sh %f
 Icon=/opt/anonsurf/anon/anon.png 
 Terminal=false
