@@ -13,7 +13,7 @@ else
 fi
 
 pkexec sudo apt update -y
-pkexec sudo apt install -y zenity i2p secure-delete tor i2p i2p-keyring secure-delete tor
+pkexec sudo apt install -y gnome-terminal zenity i2p secure-delete tor i2p i2p-keyring secure-delete tor
  
 
 
@@ -37,7 +37,7 @@ cp remove.sh ~/anon
 icon=$(zenity --question --text="Установить ярлык на рабочий стол ?"\
        --width=300 --height=100)
 
-    if [[ $? == 0 ]]; then
+    if [[ $icon == 0 ]]; then
        cp ~/.local/share/applications/anonsurf.desktop  ~/'Рабочий стол'
     fi
 
