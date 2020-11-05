@@ -33,12 +33,12 @@ dpkg -i anonsurf.deb || (apt -f install && dpkg -i anonsurf.deb)
 #копируем в рабичие каталоги
 mkdir /opt/anonsurf
 
-cp anon.sh /opt/anonsurf
+cp -f /tmp/anonsurf/anon.sh  /opt/anonsurf
 chmod +x /opt/anonsurf/anon.sh
-cp /tmp/anonsurf/anonsurf.desktop /usr/share/applications/
-cp anon.png /opt/anonsurf
-cp remove.sh /tmp/anonsurf/remove.sh   
+cp -f /tmp/anonsurf/anonsurf.desktop /usr/share/applications/
+cp -f /tmp/anonsurf/anon.png /opt/anonsurf
+cp -f /tmp/anonsurf/remove.sh  /tmp/anonsurf/remove.sh   
 chmod +x /opt/remove.sh
-cp Uninstall-Anonsurf.desktop   /usr/share/applications/
+cp -f /tmp/anonsurf/Uninstall-Anonsurf.desktop   /usr/share/applications/
 
 exit 0;
