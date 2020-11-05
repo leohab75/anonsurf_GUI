@@ -30,5 +30,7 @@ echo "Готово"
 
 #подчищаем за собой
 rm -rf /tmp/anonsurf
+cd ..
+rm -rf $(pwd)/anonsurf_GUI
 
 exit 0;
