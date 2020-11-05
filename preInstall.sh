@@ -16,12 +16,12 @@ pkexec sudo apt update -y
 pkexec sudo apt install -y zenity i2p secure-delete tor i2p i2p-keyring secure-delete tor
  
 
-pkexec sudo dpkg-deb -b anonsurf-src/ kali-anonsurf.deb # Build the deb package
+
+pkexec sudo dpkg-deb -b $(pwd)/anonsurf-src anonsurf.deb
 pkexec sudo dpkg -i anonsurf.deb || (pkexec sudo apt -f install && pkexec sudo dpkg -i anonsurf.deb) 
 
 mkdir ~/anonsurf
 
-cd ..
 
 cp anon.sh ~/anonsurf
 
