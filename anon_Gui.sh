@@ -1,14 +1,14 @@
 #!/bin/bash
 
-pkexec sudo apt install zenity -y
+sh ip2install.sh
 
 git clone https://github.com/Und3rf10w/kali-anonsurf.git
 
 cd kali-anonsurf
 
-pkexec sudo chmod +x installer.sh
 
-pkexec ./installer.sh
+pkexec sudo dpkg-deb -b kali-anonsurf-deb-src/ kali-anonsurf.deb # Build the deb package
+pkexec sudo dpkg -i kali-anonsurf.deb || (apt-get -f install && dpkg -i kali-anonsurf.deb) 
 
 mkdir ~/anonsurf
 
@@ -31,3 +31,4 @@ zenity --question --text="Установить ярлык на рабочий с
     fi
 
 
+exit 0;

@@ -11,9 +11,7 @@ sudo apt install git
 
 git clone https://github.com/leohab75/anonsurf_GUI.git
 
-cd anonsurf_GUI/
-
-sudo chmod +x anon_Gui.sh && sudo ./anon_Gui.sh
+cd anonsurf_GUI/ && sh anon_Gui.sh
 
 
 
