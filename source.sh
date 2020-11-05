@@ -37,7 +37,7 @@ cp anon.sh /opt/anonsurf
 chmod +x /opt/anonsurf/anon.sh
 cp /tmp/anonsurf/anonsurf.desktop /usr/share/applications/
 cp anon.png /opt/anonsurf
-cp /tmp/anonsurf/remove.sh   
+cp remove.sh /tmp/anonsurf/remove.sh   
 chmod +x /opt/remove.sh
 cp Uninstall-Anonsurf.desktop   /usr/share/applications/
 

@@ -10,6 +10,7 @@ mv source.sh /tmp/anonsurf
 mv remove.sh /tmp/anonsurf
 mv Uninstall-Anonsurf.desktop /tmp/anonsurf
 mv anon.png /tmp/anonsurf
+cp anon.sh /tmp/anonsurf
 mv anonsurf.desktop /tmp/anonsurf
 mv Uninstall-Anonsurf.desktop /tmp/anonsurf
 
