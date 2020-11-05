@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#подготовим почву)
+rm -rf /tmp/anonsurf
 
 #перемещаем рабочие файлы во временный каталог
 mkdir /tmp/anonsurf
@@ -21,7 +23,7 @@ desktop-file-validate /usr/share/applications/Uninstall-Anonsurf.desktop
 
 
 #подчищаем за собой
-rm -rf /tmp/anonsurf
-rm -rf $(pwd)
+#rm -rf /tmp/anonsurf
+#rm -rf $(pwd)
 
 exit 0;

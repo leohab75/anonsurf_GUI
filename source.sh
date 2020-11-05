@@ -2,6 +2,13 @@
 
 apt install -y curl 
 
+#подготоим почву
+rm -f /etc/apt/sources.list.d/i2p.list
+rm -rf /opt/anonsurf
+rm -f /usr/share/applications/Anonsurf.desktop
+rm -f /usr/share/applications/Uninstall-Anonsurf.desktop
+
+
 #устанавливаем репозитории для Тора
 if [[ -n $(cat /etc/os-release |grep ubuntu) ]]; then
       apt-add-repository ppa:i2p-maintainers/i2p
