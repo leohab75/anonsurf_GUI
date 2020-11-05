@@ -31,7 +31,7 @@ cp anonsurf.desktop ~/.local/share/applications/
 
 cp anon.png ~/anonsurf
 
-cp remove.sh ~/anon
+cp remove.sh ~/anonsurf
 
 
 icon=$(zenity --question --text="Установить ярлык на рабочий стол ?"\
