@@ -22,7 +22,7 @@ pkexec sh /tmp/anonsurf/source.sh
 #проверка файла приложения
 desktop-file-validate /usr/share/applications/anonsurf.desktop
 desktop-file-validate /usr/share/applications/Uninstall-Anonsurf.desktop
-update-desktop-database
+install -vdm755 /usr/share/applications && update-desktop-database
 
 
 sleep 10
