@@ -27,7 +27,7 @@ cp anon.sh ~/anonsurf
 
 pkexec sudo chmod +x ~/anonsurf/anon.sh
 
-cp anonsurf.desktop ~/.local/share/applications/
+pcexec sudo cp anonsurf.desktop /usr/share/applications/
 
 cp anon.png ~/anonsurf
 
@@ -43,6 +43,6 @@ icon=$(zenity --question --text="Установить ярлык на рабоч
 
 cd ..
 
-rm -rf anonsurf_GUI
+#rm -rf anonsurf_GUI
 
 exit 0;
