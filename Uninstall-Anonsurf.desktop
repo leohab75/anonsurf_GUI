@@ -4,5 +4,5 @@ Categories=Network
 Name=Uninstall Anonsurf
 Comment=darknet
 Exec=/opt/anonsurf/remove.sh %f
-Icon=/usr/share/icons/anon.png 
+Icon=/opt/anonsurf/anon.png 
 Terminal=false
