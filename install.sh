@@ -1,18 +1,26 @@
 #!/bin/bash
 
+
+#перемещаем рабочие файлы во временный каталог
 mkdir /tmp/anonsurf
 mv anonsurf-src /tmp/anonsurf
-mv souce.sh /tmp/anonsurf
+mv source.sh /tmp/anonsurf
 mv remove.sh /tmp/anonsurf
 mv Uninstall-Anonsurf.desktop /tmp/anonsurf
+mv anon.png /tmp/anonsurf
+mv anonsurf.desktop /tmp/anonsurf
+mv Uninstall-Anonsurf.desktop /tmp/anonsurf
+
+#установка и настройка
+pkexec sh /tmp/anonsurf/source.sh
 
 
-pkexec sh /tmp/anonsurf/souce.sh
-
+#проверка файла приложения
 desktop-file-validate /usr/share/applications/anonsurf.desktop
-
 desktop-file-validate /usr/share/applications/Uninstall-Anonsurf.desktop
 
+
+#подчищаем за собой
 rm -rf /tmp/anonsurf
 rm -rf $(pwd)
 
