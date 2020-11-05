@@ -21,6 +21,7 @@ pkexec sh /tmp/anonsurf/source.sh
 #проверка файла приложения
 desktop-file-validate /usr/share/applications/anonsurf.desktop
 desktop-file-validate /usr/share/applications/Uninstall-Anonsurf.desktop
+update-desktop-database
 
 
 sleep 10
@@ -29,6 +30,5 @@ echo "Готово"
 
 #подчищаем за собой
 rm -rf /tmp/anonsurf
-#rm -rf $(pwd)
 
 exit 0;
