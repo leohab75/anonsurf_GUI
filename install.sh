@@ -16,6 +16,7 @@ mv -f $(pwd)/anon.sh /tmp/anonsurf
 cp    $(pwd)/anonsurf.desktop /home/$USER/'Рабочий стол'
 mv -f $(pwd)/anonsurf.desktop /tmp/anonsurf
 mv -f $(pwd)/Uninstall-Anonsurf.desktop /tmp/anonsurf
+mv -f $(pwd)/delete.sh /tmp/anonsurf
 
 #установка и настройка
 pkexec sh /tmp/anonsurf/source.sh

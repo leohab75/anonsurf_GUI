@@ -5,7 +5,7 @@ del=$(zenity --question --text="Удалить 'Anonsurf' с ПК ?? "\
 
 
 if [[ $? == 0 ]]; then
-       pkexec sudo dpkg -P anonsurf
-       pkexec rm -rf /opt/anonsurf
-
+       
+       rm -f /home/$USER/'Рабочий стол'/anonsurf.desktop
+       pkexec sh /opt/anonsurf/delete.sh
 fi
