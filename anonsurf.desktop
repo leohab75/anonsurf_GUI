@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Anonsurf
+Comment=darknet
+Exec=/opt/anon/anon.sh %f
+Icon=/opt/anon/anon.png 
+Terminal=false
