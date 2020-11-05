@@ -41,5 +41,8 @@ icon=$(zenity --question --text="Установить ярлык на рабоч
        cp ~/.local/share/applications/anonsurf.desktop  ~/'Рабочий стол'
     fi
 
+cd ..
+
+rm -rf anonsurf_GUI
 
 exit 0;
