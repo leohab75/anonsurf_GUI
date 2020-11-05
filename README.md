@@ -7,7 +7,9 @@
 
 для установки нужно скачать
 
-и запустить командой : sh anon_Gui.sh
+sudo apt install git && git clone https://github.com/leohab75/anonsurf_GUI.git
+
+и запустить командой : sudo sh anon_Gui.sh
 
 
 
