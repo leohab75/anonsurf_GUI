@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#меню утилиты
 menu=$(zenity --list --text="Функционал"\
         --radiolist --column "Pick" --column "Anonsurf"\
         True   "start"\
@@ -9,7 +10,7 @@ menu=$(zenity --list --text="Функционал"\
         FALSE  "status"\
         --height=300)
  
-  
+ # переключатель
 case $menu in
         start)
               pkexec sudo anonsurf start
@@ -43,10 +44,10 @@ case $menu in
 esac             
 
 
-sleep 2
+sleep 1
 
+#сообщение статуса сети Тор
 notifi=$(exec /etc/init.d/tor status | grep -i Active)
-
 zenity --notification  --text="$notifi"
 
 exit 0;

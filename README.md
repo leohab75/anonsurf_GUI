@@ -11,6 +11,8 @@ sudo apt install git
 
 git clone https://github.com/leohab75/anonsurf_GUI.git
 
+перейти в каталог и запустить скрипт установки
+
 cd anonsurf_GUI/ && sh install.sh
 
 по окончанию работы скрипта, файл запуска бедет расположен в /opt/anonsurf, 
@@ -18,6 +20,10 @@ cd anonsurf_GUI/ && sh install.sh
 а сам Anonsurf будет доступен в меню приложений, так же возможность его удаления
 
 Uninstall Anonsurf.
+
+Так же, будет доступна консольная утилита для вычещения опертивной памяти,
+
+команда в терминале: pandora bomb
 
 
 

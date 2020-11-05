@@ -2,6 +2,7 @@
 
 apt install -y curl 
 
+#устанавливаем репозитории для Тора
 if [[ -n $(cat /etc/os-release |grep ubuntu) ]]; then
       apt-add-repository ppa:i2p-maintainers/i2p
 
@@ -13,15 +14,16 @@ else
 
 fi
 
+#ставим Тор
 apt update -y
-apt install -y gnome-terminal zenity i2p secure-delete tor i2p i2p-keyring secure-delete tor
+apt install -y zenity i2p secure-delete tor i2p i2p-keyring secure-delete tor
  
-
+#собирае и устанавливаем .deb
 dpkg-deb -b /tmp/anonsurf/anonsurf-src anonsurf.deb
 dpkg -i anonsurf.deb || (apt -f install && dpkg -i anonsurf.deb) 
 
 
-
+#копируем в рабичие каталоги
 mkdir /opt/anonsurf
 
 cp anon.sh /opt/anonsurf
