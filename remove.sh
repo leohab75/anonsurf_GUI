@@ -6,6 +6,6 @@ del=$(zenity --question --text="Удалить 'Anonsurf' с ПК ?? "\
 
 if [[ $? == 0 ]]; then
        
-       rm -f /home/$USER/'Рабочий стол'/anonsurf.desktop
+       rm -f /home/$USER/'Рабочий стол'/anon_link
        pkexec sh /opt/anonsurf/delete.sh
 fi
