@@ -25,7 +25,9 @@ Uninstall Anonsurf.
 
 команда в терминале: pandora bomb
 
+Скачать скомпилированный .deb пакет можно из релизов 
 
+https://github.com/leohab75/anonsurf_GUI/releases/tag/v2.1
 
 
 
