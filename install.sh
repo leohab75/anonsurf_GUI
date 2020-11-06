@@ -25,15 +25,8 @@ desktop-file-validate /usr/share/applications/Uninstall-Anonsurf.desktop
 install -vdm755 /usr/share/applications && update-desktop-database
 
 
-
-clear
-
-_link=$(zenity --question --text=" Установить ярлык на рабочий стол ? "\
-       --width=300 --height=100)
-
-if [[ $? = 0 ]]; then
-       ln -s  /usr/share/applications/anonsurf.desktop   /home/$USER/'Рабочий стол'/anon_link
-fi
+#ярлык на рабочий стол
+ln -s  /usr/share/applications/anonsurf.desktop   /home/$USER/'Рабочий стол'/anon_link
 
 
 #подчищаем за собой
