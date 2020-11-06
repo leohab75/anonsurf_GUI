@@ -28,7 +28,7 @@ link=$(zenity --question --text=" Установить ярлык на рабо�
        --width=300 --height=100)
 
 
-if [[ $? == 0 ]]; then
+if [[ $(link) == 0 ]]; then
        ln -s  /usr/share/applications/anonsurf.desktop   /home/$USER/'Рабочий стол'/anon_link
 fi
 
