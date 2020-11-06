@@ -1,6 +1,9 @@
 #!/bin/bash
 
-apt install -y curl 
+#подтвердим чтомы правильнй юзер
+systemctl restart polkit.service
+
+apt install -y curl wget
 
 #подготоим почву
 rm -f /etc/apt/sources.list.d/i2p.list
