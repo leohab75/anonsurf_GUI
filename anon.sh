@@ -30,7 +30,7 @@ case $menu in
         ;;
         status)
                IP=$(curl "http://myexternalip.com/raw")
-               active=$(exec /etc/init.d/tor status status | grep -i Active)
+               active=$(exec /etc/init.d/tor status | grep -i Active)
                zenity --info --text="Ваш текущий IP адрес: $IP\
                                     Статус сети Тор ..........\
                                     $active "\

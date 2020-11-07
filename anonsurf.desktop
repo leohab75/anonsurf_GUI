@@ -4,5 +4,5 @@ Categories=Network
 Name=Anonsurf
 Comment=darknet
 Exec=/opt/anonsurf/anon.sh %f
-Icon=/opt/anonsurf/anon.png 
+Icon=/usr/share/pixmaps/anon.png 
 Terminal=false
