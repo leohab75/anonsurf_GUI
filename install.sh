@@ -20,7 +20,7 @@ install -vdm755 /usr/share/applications && update-desktop-database
 update-icon-caches /usr/share/pixmaps/*
 
 #ярлык на рабочий стол
-ln -s  /usr/share/applications/anonsurf.desktop   /home/$USER/'Рабочий стол'/anon_link
+ln -s  /usr/share/applications/anonsurf.desktop   /home/$USER/'Рабочий стол'/Anonsurf
 
 
 #подчищаем за собой
