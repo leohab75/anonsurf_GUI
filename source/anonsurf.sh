@@ -69,60 +69,17 @@ function init {
 }
 
 
-function starti2p {
-	echo -e -n " $GREEN*$BLUE starting I2P services$RESETCOLOR\n"
-	service tor stop
-
-	# Modify DNS settings
-	if [ "$resolvconf_support" = false ] 
-	then
-		cp /etc/resolv.conf /etc/resolv.conf.bak;
-		touch /etc/resolv.conf;
-		echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 209.222.18.218' > /etc/resolv.conf;
-		echo -e " $GREEN*$BLUE Modified resolv.conf to use localhost and Private Internet Access DNS$RESETCOLOR\n";
-	else
-		cp /etc/resolvconf/resolv.conf.d/head{,.bak};
-		echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 209.222.18.218' >> /etc/resolvconf/resolv.conf.d/head;
-		echo -e " $GREEN*$BLUE Modified resolvconf to use localhost and Private Internet Access DNS$RESETCOLOR\n";
-		resolvconf -u;
-	fi
-	sudo -u i2psvc i2prouter start
-	sleep 2
-	xdg-open 'http://127.0.0.1:7657/home'
-}
-
-function stopi2p {
-	echo -e -n " $GREEN*$BLUE stopping I2P services\n$RESETCOLOR"
-	sudo -u i2psvc i2prouter stop
-	
-	# restore DNS settings
-	if [ "$resolvconf_support" = false ] 
-	then
-		if [ -e /etc/resolv.conf.bak ]; then
-			rm /etc/resolv.conf
-			cp /etc/resolv.conf.bak /etc/resolv.conf
-		fi
-	else
-		mv /etc/resolvconf/resolv.conf.d/head{.bak,}
-		resolvconf -u
-	fi
-}
-
 
 function ip {
 
 	echo -e "\nMy ip is:\n"
 	sleep 1
-	curl "http://myexternalip.com/raw" # Had a few issues with FrozenBox giving me the wrong IP address
-	echo -e "\n\n----------------------------------------------------------------------"
+	wget -qO- eth0.me # Had a few issues with FrozenBox giving me the wrong IP address
+	echo -e "\n\n-------"
 }
 
 function start {
-	# Make sure only root can run this script
-	if [ $(id -u) -ne 0 ]; then
-		echo -e -e "\n$GREEN[$RED!$GREEN] $RED This script must be run as root$RESETCOLOR\n" >&2
-		exit 1
-	fi
+	
 	
 	# Check defaults for Tor
 	grep -q -x 'RUN_DAEMON="yes"' /etc/default/tor
@@ -214,13 +171,7 @@ function start {
 
 
 function stop {
-	# Make sure only root can run our script
-	if [ $(id -u) -ne 0 ]; then
-		echo -e "\n$GREEN[$RED!$GREEN] $RED This script must be run as root$RESETCOLOR\n" >&2
-		exit 1
-	fi
-	echo -e "\n$GREEN[$BLUE i$GREEN ]$BLUE Stopping anonymous mode:$RESETCOLOR\n"
-
+	
 	iptables -F
 	iptables -t nat -F
 	echo -e " $GREEN*$BLUE Deleted all iptables rules\n$RESETCOLOR"
@@ -264,10 +215,17 @@ function change {
 	echo -e " $GREEN*$BLUE Tor daemon reloaded and forced to change nodes$RESETCOLOR\n"
 }
 
-function status {
-	service tor status
-}
+# function status {
 
+#     IP=$(wget -qO- eth0.me)
+#             active=$(exec /etc/init.d/tor status | grep -i Active)
+#             zenity --info --text="Ваш текущий IP адрес: $IP\
+#                         Статус сети Тор ..........\
+#                         $active "\
+#                         --height=200 --width=200
+        
+# }		
+	
 case "$1" in
 	start)
 		init
@@ -285,12 +243,6 @@ case "$1" in
 	;;
 	myip|ip)
 		ip
-	;;
-	starti2p)
-		starti2p
-	;;
-	stopi2p)
-		stopi2p
 	;;
 	restart)
 		$0 stop
@@ -312,14 +264,13 @@ Parrot AnonSurf Module
 	$RED change$BLUE -$GREEN Changes identity restarting TOR
 	$RED status$BLUE -$GREEN Check if AnonSurf is working properly
 	$RED myip$BLUE -$GREEN Show your current IP address
-	----[ I2P related features ]----
-	$RED starti2p$BLUE -$GREEN Start i2p services
-	$RED stopi2p$BLUE -$GREEN Stop i2p services
 	
+
 $RESETCOLOR" >&2
 exit 1
 ;;
 esac
+
 
 echo -e $RESETCOLOR
 exit 0

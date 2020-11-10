@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#меню утилиты
+menu=$(zenity --list --text="Функционал"\
+        --radiolist --column "Pick" --column "Anonsurf"\
+        True   "start"\
+        FALSE  "stop"\
+        FALSE  "restart"\
+        FALSE  "change"\
+        FALSE  "status"\
+        --height=300)
+ 
+if [ $menu == "status" ]; then
+        IP=$(wget -qO- eth0.me)
+        active=$(exec /etc/init.d/tor status | grep -i Active)
+        zenity --info --text="Ваш текущий IP адрес: $IP \n\
+                Статус сети Тор \n\
+                $active "\
+                --height=200 --width=200
+else
+
+        pkexec bash /etc/init.d/anonsurf $menu
+fi
+
+#сообщение статуса сети Тор
+notifi=$(exec /etc/init.d/tor status | grep -i Active)
+zenity --notification  --text="$notifi"
+
+        
+
+exit 0;

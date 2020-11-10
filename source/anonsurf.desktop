@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 Categories=Network
-Name=Uninstall Anonsurf
+Name=Anonsurf
 Comment=darknet
-Exec=/opt/anonsurf/remove.sh %f
+Exec=/usr/bin/Anon %f
 Icon=/usr/share/pixmaps/anon.png 
 Terminal=false
