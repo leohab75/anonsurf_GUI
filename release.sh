@@ -11,7 +11,7 @@ then
 
     echo -e "\n $RED -------------"
     echo -e "Relese OS: "
-    echo -e "\n $GREEN debian or ubuntu"
+    echo -e "\n $GREEN debian | ubuntu"
     echo -e "\n $RED -------------"
     
     rm -f /etc/apt/sources.list.d/tor.list
@@ -34,7 +34,7 @@ then
 
     echo -e "\n $RED -------------"
     echo -e "Relese OS: "
-    echo -e "\n $GREEN or rhel"
+    echo -e "\n $GREEN CentOs | rhel"
     echo -e "\n $RED -------------"
     
     mv /tmp/anonsurf/ctor.repo /etc/yum.repos.d/

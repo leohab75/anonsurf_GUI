@@ -218,7 +218,7 @@ function change {
 function status {
 
     IP=$(wget -qO- eth0.me)
-            active=$(exec /etc/init.d/tor status | grep -i Active)
+            active=$(systemctl status tor | grep -i Active)
             zenity --info --text="Ваш текущий IP адрес: $IP\
                         Статус сети Тор ..........\
                         $active "\
