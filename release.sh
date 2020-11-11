@@ -39,6 +39,8 @@ then
     dnf install epel-release -y
     mv ctor.repo /etc/yum.repos.d/
     dnf install tor dpkg -y
+    yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    dnf config-manager --set-enabled PowerTools -y
    
     
 elif [[ -n $(cat /etc/os-release |  grep -i ID=fedora) ]] ;
@@ -52,11 +54,12 @@ then
     dnf install epel-release -y
     mv ftor.repo /etc/yum.repos.d/
     dnf install tor dpkg -y
+    dnf config-manager --set-enabled PowerTools -y
     
 else 
 
      echo -e "----------------"
-     echo -e "\n $RED NOT release"
+     echo -e "\n $RED NOT release $RESETCOLOR"
      echo -e "----------------"
 
      exit 1;
@@ -89,7 +92,6 @@ cp -v /tmp/anonsurf/UnAnDelete /etc/init.d/
 cp -v /tmp/anonsurf/anonsurf /etc/init.d/
 cp -v /tmp/anonsurf/anon.png /usr/share/pixmaps/
 
-echo -e " $RESETCOLOR"
 
 #postinst
 if [ -e /etc/tor/torrc ]; then
@@ -109,5 +111,7 @@ chmod +x /usr/bin/Anon
 chmod +x /usr/bin/UnAnonsurf
 chmod +x /etc/init.d/UnAnDelete
 chmod +x /usr/share/pixmaps/anon.png  
+
+echo -e "\n $GREEN Установка звершена с кодом: $RED $? $RESETCOLOR\n"
 
 exit 0;
