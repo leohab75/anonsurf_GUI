@@ -2,6 +2,7 @@
 
 export GREEN='\033[1;92m'
 export RED='\033[1;91m'
+export RESETCOLOR='\033[1;00m'
 
 #Качаем и устанавливаем Тор
 
@@ -36,11 +37,11 @@ then
     echo -e "\n $GREEN or rhel"
     echo -e "\n $RED -------------"
     
-    dnf install epel-release -y
     mv ctor.repo /etc/yum.repos.d/
     dnf install tor dpkg -y
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     dnf config-manager --set-enabled PowerTools -y
+    dnf install tor dpkg epel-release -y
    
     
 elif [[ -n $(cat /etc/os-release |  grep -i ID=fedora) ]] ;
@@ -50,17 +51,16 @@ then
     echo -e "Relese OS: "
     echo -e "\n $GREEN fedora"
     echo -e "\n $RED -------------"
-    
-    dnf install epel-release -y
+     
     mv ftor.repo /etc/yum.repos.d/
-    dnf install tor dpkg -y
     dnf config-manager --set-enabled PowerTools -y
+    dnf install tor dpkg epel-release -y
     
 else 
 
-     echo -e "----------------"
-     echo -e "\n $RED NOT release $RESETCOLOR"
-     echo -e "----------------"
+     echo -e "\n----------------"
+     echo -e "\n $RED NOT release "
+     echo -e "----------------\n"
 
      exit 1;
 
@@ -102,6 +102,7 @@ if [ -e /etc/tor/torrc.anon ]; then
 fi
 
 tor -f /etc/tor/torrc
+systemctl start tor
 
 chmod +x /etc/init.d/anonsurf
 chmod +x /usr/share/applications/anonsurf.desktop

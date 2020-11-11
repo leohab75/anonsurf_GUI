@@ -12,7 +12,7 @@ menu=$(zenity --list --text="Функционал"\
  
 if [ $menu == "status" ]; then
         IP=$(wget -qO- eth0.me)
-        active=$(exec /etc/init.d/tor status | grep -i Active)
+        active=$(systemctl status tor | grep -i Active)
         zenity --info --text="Ваш текущий IP адрес: $IP \n\
                 Статус сети Тор \n\
                 $active "\
