@@ -56,7 +56,7 @@ elif [[ -n $(cat /etc/os-release |  grep -i ID=centos) || $(cat /etc/os-release 
         echo -e "\n $GREEN fedora"
         echo -e "\n $RED -------------\n"
 
-            if [ - /etc/yum.repos.d/ftor.repo ]; then
+            if [ -f /etc/yum.repos.d/ftor.repo ]; then
             mv /tmp/anonsurf/ftor.repo /etc/yum.repos.d/
             fi
 
@@ -67,7 +67,7 @@ elif [[ -n $(cat /etc/os-release |  grep -i ID=centos) || $(cat /etc/os-release 
         echo -e "\n $GREEN CentOs | rhel"
         echo -e "\n $RED -------------\n"
 
-            if [ - /etc/yum.repos.d/ctor.repo ]; then
+            if [ -f /etc/yum.repos.d/ctor.repo ]; then
             mv /tmp/anonsurf/ctor.repo /etc/yum.repos.d/
             fi
 
