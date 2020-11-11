@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# git clone 
-
-#cd git clone
-
 
 rm -rf /tmp/anonsurf
 
@@ -36,8 +32,8 @@ update-icon-caches /usr/share/pixmaps/*
 #ярлык на рабочий стол
 ln -s  /usr/share/applications/anonsurf.desktop   /home/$USER/'Рабочий стол'/Anonsurf
 
-
-
+#удаляем рабочий каталог
+rm -rf /tmp/anonsurf
 
 #postrm
 # if [ -e /etc/tor/torrc.orig ]; then

@@ -13,20 +13,20 @@ then
     echo -e "\n $GREEN debian or ubuntu"
     echo -e "\n $RED -------------"
     
-    # rm -f /etc/apt/sources.list.d/tor.list
-    # release=$(lsb_release -c | awk '{print $ 2}')
+    rm -f /etc/apt/sources.list.d/tor.list
+    release=$(lsb_release -c | awk '{print $ 2}')
     
-    # apt install apt-transport-https wget zenity aptitude -y
+    apt install apt-transport-https wget zenity aptitude -y
     
-    # echo "deb https://deb.torproject.org/torproject.org $release main" > /etc/apt/sources.list.d/tor.list
+    echo "deb https://deb.torproject.org/torproject.org $release main" > /etc/apt/sources.list.d/tor.list
      
      
-    #  wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
-    #  gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
+     wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
+     gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
      
      
-    # apt update && apt install tor deb.torproject.org-keyring -y && apt install -f
-    # dpkg --configure -a
+    apt update && apt install tor deb.torproject.org-keyring -y && apt install -f
+    dpkg --configure -a
     
 elif [[ -n $(cat /etc/os-release |  grep -i ID=centos) || $(cat /etc/os-release |  grep -i ID=rhel) ]] ;
 then 
@@ -63,9 +63,7 @@ else
 
 fi
 
-$RESETCOLOR
-
-
+$BLUE
 #подготовим почву
 rm -fv /etc/init.d/anonsurf.sh
 rm -fv /usr/share/applications/anonsurf.desktop
@@ -91,8 +89,6 @@ cp -v /tmp/anonsurf/UnAnDelete.sh /etc/init.d/
 cp -v /tmp/anonsurf/anonsurf.sh /etc/init.d/
 cp -v /tmp/anonsurf/anon.png /usr/share/pixmaps/
 
-
-#systemctl enable anonsurf.service
 
 
 #postinst
