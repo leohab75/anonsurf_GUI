@@ -6,7 +6,7 @@ export RESETCOLOR='\033[1;00m'
 
 #Качаем и устанавливаем Тор
 
-if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu)]] ; then 
+if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu) ]]; then 
     
     if [[ -n  $(cat /etc/os-release |  grep -i ID=debian) ]]; then
 
@@ -99,6 +99,7 @@ else
      exit 1;
 
 fi
+
 
 echo -e " $GREEN*$BLUE"
 #подготовим почву
