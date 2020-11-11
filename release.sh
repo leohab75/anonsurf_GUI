@@ -45,8 +45,9 @@ then
     dnf install tor dpkg -y
     dnf install epel-release -y 
    
-    mkdir  /etc/network/
-    
+    if [ -f /etc/network/ ];then 
+       mkdir /etc/network
+    fi   
     
 elif [[ -n $(cat /etc/os-release |  grep -i ID=fedora) ]] ;
 then
@@ -62,7 +63,9 @@ then
     dnf install tor dpkg -y
     dnf install -y
     
-    mkdir /etc/network/
+    if [ -f /etc/network/ ];then 
+       mkdir /etc/network
+    fi   
 
 else 
 
