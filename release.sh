@@ -38,10 +38,12 @@ then
     echo -e "\n $RED -------------"
     
     mv /tmp/anonsurf/ctor.repo /etc/yum.repos.d/
+    dnf update -y
     dnf install tor dpkg -y
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     dnf config-manager --set-enabled PowerTools -y
-    dnf install tor dpkg epel-release -y
+    dnf install tor dpkg -y
+    dnf install epel-release -y 
    
     
 elif [[ -n $(cat /etc/os-release |  grep -i ID=fedora) ]] ;
@@ -53,8 +55,10 @@ then
     echo -e "\n $RED -------------"
      
     mv /tmp/anonsurf/ftor.repo /etc/yum.repos.d/
+    dnf update -y
     dnf config-manager --set-enabled PowerTools -y
-    dnf install tor dpkg epel-release -y
+    dnf install tor dpkg -y
+    dnf install -y
     
 else 
 
