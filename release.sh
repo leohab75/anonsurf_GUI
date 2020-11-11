@@ -63,17 +63,17 @@ else
 
 fi
 
-$BLUE
+echo -e " $GREEN*$BLUE"
 #подготовим почву
-rm -fv /etc/init.d/anonsurf.sh
+rm -fv /etc/init.d/anonsurf
 rm -fv /usr/share/applications/anonsurf.desktop
 rm -fv /usr/share/applications/Uninstall-Anonsurf.desktop
 rm -fv /etc/tor/torrc.anon 
 rm -fv /etc/tor/onion.pac   
 rm -fv /etc/systemd/system/anonsurf.service
 rm -fv /usr/bin/Anon 
-rm -fv /us/bin/UnAnonsurf.sh
-rm -fv /etc/init.d/UnAnDelete.sh
+rm -fv /us/bin/UnAnonsurf
+rm -fv /etc/init.d/UnAnDelete
 rm -fv /usr/share/pixmaps/anon.png  
 
 
@@ -85,11 +85,11 @@ cp -v /tmp/anonsurf/onion.pac /etc/tor/
 cp -v /tmp/anonsurf/anonsurf.service /etc/systemd/system/
 cp -v /tmp/anonsurf/Anon /usr/bin/
 cp -v /tmp/anonsurf/UnAnonsurf /usr/bin/
-cp -v /tmp/anonsurf/UnAnDelete.sh /etc/init.d/
-cp -v /tmp/anonsurf/anonsurf.sh /etc/init.d/
+cp -v /tmp/anonsurf/UnAnDelete /etc/init.d/
+cp -v /tmp/anonsurf/anonsurf /etc/init.d/
 cp -v /tmp/anonsurf/anon.png /usr/share/pixmaps/
 
-
+echo -e " $RESETCOLOR"
 
 #postinst
 if [ -e /etc/tor/torrc ]; then
@@ -103,13 +103,11 @@ tor -f /etc/tor/torrc
 
 chmod +x /etc/init.d/anonsurf
 chmod +x /usr/share/applications/anonsurf.desktop
-chmod +x /usr/share/applications/Uninstall-Anonsurf.desktop
-chmod +x /etc/tor/torrc.anon 
-chmod +x /etc/tor/onion.pac   
+chmod +x /usr/share/applications/Uninstall-Anonsurf.desktop 
 chmod +x /etc/systemd/system/anonsurf.service
 chmod +x /usr/bin/Anon  
 chmod +x /usr/bin/UnAnonsurf
-chmod +x /etc/init.d/UnAnDelete.sh
+chmod +x /etc/init.d/UnAnDelete
 chmod +x /usr/share/pixmaps/anon.png  
 
 exit 0;

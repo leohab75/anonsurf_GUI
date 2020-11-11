@@ -215,16 +215,16 @@ function change {
 	echo -e " $GREEN*$BLUE Tor daemon reloaded and forced to change nodes$RESETCOLOR\n"
 }
 
-# function status {
+function status {
 
-#     IP=$(wget -qO- eth0.me)
-#             active=$(exec /etc/init.d/tor status | grep -i Active)
-#             zenity --info --text="Ваш текущий IP адрес: $IP\
-#                         Статус сети Тор ..........\
-#                         $active "\
-#                         --height=200 --width=200
+    IP=$(wget -qO- eth0.me)
+            active=$(exec /etc/init.d/tor status | grep -i Active)
+            zenity --info --text="Ваш текущий IP адрес: $IP\
+                        Статус сети Тор ..........\
+                        $active "\
+                        --height=200 --width=200
         
-# }		
+}		
 	
 case "$1" in
 	start)
