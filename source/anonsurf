@@ -82,14 +82,14 @@ function start {
 	
 	
 	# Check defaults for Tor
-	grep -q -x 'RUN_DAEMON="yes"' /etc/default/tor
-	if [ $? -ne 0 ]; then
-		echo -e "\n$GREEN[$RED!$GREEN]$RED Please add the following to your /etc/default/tor and restart service:$RESETCOLOR\n" >&2
-		echo -e "$BLUE#----------------------------------------------------------------------#$RESETCOLOR"
-		echo -e 'RUN_DAEMON="yes"'
-		echo -e "$BLUE#----------------------------------------------------------------------#$RESETCOLOR\n"
-		exit 1
-	fi	
+	# grep -q -x 'RUN_DAEMON="yes"' /etc/default/tor
+	# if [ $? -ne 0 ]; then
+	# 	echo -e "\n$GREEN[$RED!$GREEN]$RED Please add the following to your /etc/default/tor and restart service:$RESETCOLOR\n" >&2
+	# 	echo -e "$BLUE#----------------------------------------------------------------------#$RESETCOLOR"
+	# 	echo -e 'RUN_DAEMON="yes"'
+	# 	echo -e "$BLUE#----------------------------------------------------------------------#$RESETCOLOR\n"
+	# 	exit 1
+	# fi	
 	
 	# Kill IPv6 services
 	echo -e "\n$GREEN[$BLUE i$GREEN ]$BLUE Stopping IPv6 services:$RESETCOLOR\n"

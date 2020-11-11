@@ -45,6 +45,8 @@ then
     dnf install tor dpkg -y
     dnf install epel-release -y 
    
+    mkdir  /etc/network/
+    
     
 elif [[ -n $(cat /etc/os-release |  grep -i ID=fedora) ]] ;
 then
@@ -60,6 +62,8 @@ then
     dnf install tor dpkg -y
     dnf install -y
     
+    mkdir /etc/network/
+
 else 
 
      echo -e "\n----------------"
@@ -96,9 +100,7 @@ cp -v /tmp/anonsurf/UnAnDelete /etc/init.d/
 cp -v /tmp/anonsurf/anonsurf /etc/init.d/
 cp -v /tmp/anonsurf/anon.png /usr/share/pixmaps/
 
-if [ -e /lib/systemd/system/tor.service]; then 
- mv /tmp/anonsurf/tor.service /lib/systemd/system/tor.service
-fi     
+      
 
 #postinst
 if [ -e /etc/tor/torrc ]; then
@@ -108,8 +110,9 @@ if [ -e /etc/tor/torrc.anon ]; then
  mv /etc/tor/torrc.anon /etc/tor/torrc
 fi
 
-tor -f /etc/tor/torrc
 systemctl start tor
+tor -f /etc/tor/torrc
+mv /tmp/anonsurf/tor.service /lib/systemd/system/tor.service
 
 chmod +x /etc/init.d/anonsurf
 chmod +x /usr/share/applications/anonsurf.desktop
