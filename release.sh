@@ -37,9 +37,11 @@ then
     echo -e "\n $GREEN CentOs | rhel"
     echo -e "\n $RED -------------\n"
     
-    mv /tmp/anonsurf/ctor.repo /etc/yum.repos.d/
+    if [ - /etc/yum.repos.d/ctor.repo ]; then
+      mv /tmp/anonsurf/ctor.repo /etc/yum.repos.d/
+    fi
+    
     dnf update -y
-    dnf install tor dpkg -y
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     dnf config-manager --set-enabled PowerTools -y
     dnf install tor dpkg -y
@@ -47,6 +49,7 @@ then
    
     if [ -f /etc/network/ ];then 
        mkdir /etc/network
+       toch /etc/network/iptables.rules
     fi   
     
 elif [[ -n $(cat /etc/os-release |  grep -i ID=fedora) ]] ;
@@ -57,7 +60,10 @@ then
     echo -e "\n $GREEN fedora"
     echo -e "\n $RED -------------\n"
      
-    mv /tmp/anonsurf/ftor.repo /etc/yum.repos.d/
+    if [ - /etc/yum.repos.d/ftor.repo ]; then
+      mv /tmp/anonsurf/ftor.repo /etc/yum.repos.d/
+    fi
+
     dnf update -y
     dnf config-manager --set-enabled PowerTools -y
     dnf install tor dpkg -y
@@ -65,7 +71,10 @@ then
     
     if [ -f /etc/network/ ];then 
        mkdir /etc/network
+       touch /etc/network/iptables.rules
     fi   
+
+#elif SUSE | Arch
 
 else 
 
@@ -115,7 +124,11 @@ fi
 
 systemctl start tor
 tor -f /etc/tor/torrc
-mv /tmp/anonsurf/tor.service /lib/systemd/system/tor.service
+
+if [ -f /lib/systemd/system/tor.service ]; then
+ rm -fv /lib/systemd/system/tor.service
+ mv /tmp/anonsurf/tor.service /lib/systemd/system/tor.service
+fi 
 
 chmod +x /etc/init.d/anonsurf
 chmod +x /usr/share/applications/anonsurf.desktop

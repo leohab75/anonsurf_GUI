@@ -81,19 +81,15 @@ function ip {
 function start {
 	
 	
-	# Check defaults for Tor
-	# grep -q -x 'RUN_DAEMON="yes"' /etc/default/tor
-	# if [ $? -ne 0 ]; then
-	# 	echo -e "\n$GREEN[$RED!$GREEN]$RED Please add the following to your /etc/default/tor and restart service:$RESETCOLOR\n" >&2
-	# 	echo -e "$BLUE#----------------------------------------------------------------------#$RESETCOLOR"
-	# 	echo -e 'RUN_DAEMON="yes"'
-	# 	echo -e "$BLUE#----------------------------------------------------------------------#$RESETCOLOR\n"
-	# 	exit 1
-	# fi	
+	#Check defaults for Tor
+	grep -q -x 'RUN_DAEMON="yes"' /etc/default/tor
+	if [ $? -ne 0 ]; then
+		echo 'RUN_DAEMON="yes"'  >> /etc/default/tor
+	fi	
 	
 	# Kill IPv6 services
 	echo -e "\n$GREEN[$BLUE i$GREEN ]$BLUE Stopping IPv6 services:$RESETCOLOR\n"
-	sed -i '/^.*\#kali-anonsurf$/d' /etc/sysctl.conf #delete lines containing #kali-anonsurf in /etc/sysctl.conf
+	sed -i '/^.*\#anonsurf$/d' /etc/sysctl.conf #delete lines containing #kali-anonsurf in /etc/sysctl.conf
 	# add lines to sysctl.conf that will kill ipv6 services
 	echo "net.ipv6.conf.all.disable_ipv6 = 1 #kali-anonsurf" >> /etc/sysctl.conf
 	echo "net.ipv6.conf.default.disable_ipv6=1 #kali-anonsurf" >> /etc/sysctl.conf
@@ -199,7 +195,7 @@ function stop {
 	echo -e "\n$GREEN[$BLUE i$GREEN ]$BLUE Reenabling IPv6 services:$RESETCOLOR\n"
 
 	# reenable IPv6 services
-	sed -i '/^.*\#kali-anonsurf$/d' /etc/sysctl.conf #delete lines containing #kali-anonsurf in /etc/sysctl.conf
+	sed -i '/^.*\#anonsurf$/d' /etc/sysctl.conf #delete lines containing #kali-anonsurf in /etc/sysctl.conf
 	sysctl -p # have sysctl reread /etc/sysctl.conf
 
 	service network-manager force-reload > /dev/null 2>&1
@@ -217,12 +213,7 @@ function change {
 
 function status {
 
-    IP=$(wget -qO- eth0.me)
-            active=$(systemctl status tor | grep -i Active)
-            zenity --info --text="Ваш текущий IP адрес: $IP\
-                        Статус сети Тор ..........\
-                        $active "\
-                        --height=200 --width=200
+    systemctl status tor
         
 }		
 	
