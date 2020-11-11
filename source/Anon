@@ -23,7 +23,7 @@ else
 fi
 
 #сообщение статуса сети Тор
-notifi=$(exec /etc/init.d/tor status | grep -i Active)
+notifi=$(systemctl status tor | grep -i Active)
 zenity --notification  --text="$notifi"
 
         

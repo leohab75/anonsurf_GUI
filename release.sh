@@ -96,6 +96,9 @@ cp -v /tmp/anonsurf/UnAnDelete /etc/init.d/
 cp -v /tmp/anonsurf/anonsurf /etc/init.d/
 cp -v /tmp/anonsurf/anon.png /usr/share/pixmaps/
 
+if [ -e /lib/systemd/system/tor.service]; then 
+ mv /tmp/anonsurf/tor.service /lib/systemd/system/tor.service
+fi     
 
 #postinst
 if [ -e /etc/tor/torrc ]; then

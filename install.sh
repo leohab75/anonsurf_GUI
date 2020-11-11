@@ -20,9 +20,9 @@ cp -v  $(pwd)/source/UnAnonsurf /tmp/anonsurf/
 cp -v  $(pwd)/source/UnAnDelete /tmp/anonsurf/
 cp -v  $(pwd)/source/anonsurf /tmp/anonsurf/
 cp -v  $(pwd)/source/anon.png /tmp/anonsurf/
-
-cp -v $(pwd)/source/ctor.repo /tmp/anonsurf/
-cp -v $(pwd)/source/ftor.repo /tmp/anonsurf/
+cp -v  $(pwd)/source/tor.service /tmp/anonsurf/$
+cp -v  $(pwd)/source/ctor.repo /tmp/anonsurf/
+cp -v  $(pwd)/source/ftor.repo /tmp/anonsurf/
 
 echo -e "\n $RESETCOLOR \n"
 # Добавляем репозитории и
