@@ -6,19 +6,32 @@ export RESETCOLOR='\033[1;00m'
 
 #Качаем и устанавливаем Тор
 
-if [[ -n  $(cat /etc/os-release |  grep -i ID=debian) || $(cat /etc/os-release |  grep -i ubuntu) ]] ;
-then 
+if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu)]] ; then 
+    
+    if [[ -n  $(cat /etc/os-release |  grep -i ID=debian) ]]; then
 
-    echo -e "\n $RED -------------"
-    echo -e "Relese OS: "
-    echo -e "\n $GREEN debian | ubuntu"
-    echo -e "\n $RED -------------"
-    
-    rm -f /etc/apt/sources.list.d/tor.list
-    release=$(lsb_release -c | awk '{print $ 2}')
-    
+        echo -e "\n $RED -------------"
+        echo -e "Relese OS: "
+        echo -e "\n $GREEN debian "
+        echo -e "\n $RED -------------"
+        
+        
+        release=$(lsb_release -c | awk '{print $ 2}')
+
+    else
+
+        echo -e "\n $RED -------------"
+        echo -e "Relese OS: "
+        echo -e "\n $GREEN ubuntu "
+        echo -e "\n $RED -------------"
+
+        release=$(cat /etc/os-release | grep -i UBUNTU_CODENAME | sed -r 's/.{,16}//')
+            
+    fi
+
+
     apt install apt-transport-https wget zenity aptitude -y
-    
+    rm -fv /etc/apt/sources.list.d/tor.list
     echo "deb https://deb.torproject.org/torproject.org $release main" > /etc/apt/sources.list.d/tor.list
      
      
@@ -28,51 +41,52 @@ then
      
     apt update && apt install tor deb.torproject.org-keyring -y && apt install -f
     dpkg --configure -a
-    
-elif [[ -n $(cat /etc/os-release |  grep -i ID=centos) || $(cat /etc/os-release |  grep -i ID=rhel) ]] ;
-then 
 
-    echo -e "\n $RED -------------"
-    echo -e "Relese OS: "
-    echo -e "\n $GREEN CentOs | rhel"
-    echo -e "\n $RED -------------\n"
     
-    if [ - /etc/yum.repos.d/ctor.repo ]; then
-      mv /tmp/anonsurf/ctor.repo /etc/yum.repos.d/
+    
+elif [[ -n $(cat /etc/os-release |  grep -i ID=centos) || $(cat /etc/os-release |  grep -i ID=rhel) || $(cat /etc/os-release |  grep -i ID=fedora) ]]; then 
+
+
+
+    if [[ -n $(cat /etc/os-release |  grep -i ID=fedora) ]] ;then
+
+
+        echo -e "\n $RED -------------"
+        echo -e "Relese OS: "
+        echo -e "\n $GREEN fedora"
+        echo -e "\n $RED -------------\n"
+
+            if [ - /etc/yum.repos.d/ftor.repo ]; then
+            mv /tmp/anonsurf/ftor.repo /etc/yum.repos.d/
+            fi
+
+    else
+
+        echo -e "\n $RED -------------"
+        echo -e "Relese OS: "
+        echo -e "\n $GREEN CentOs | rhel"
+        echo -e "\n $RED -------------\n"
+
+            if [ - /etc/yum.repos.d/ctor.repo ]; then
+            mv /tmp/anonsurf/ctor.repo /etc/yum.repos.d/
+            fi
+
+
     fi
-    
+
+     
     dnf update -y
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     dnf config-manager --set-enabled PowerTools -y
     dnf install tor dpkg -y
     dnf install epel-release -y 
    
-    if [ -f /etc/network/ ];then 
-       mkdir /etc/network
-       toch /etc/network/iptables.rules
-    fi   
-    
-elif [[ -n $(cat /etc/os-release |  grep -i ID=fedora) ]] ;
-then
-    
-    echo -e "\n $RED -------------"
-    echo -e "Relese OS: "
-    echo -e "\n $GREEN fedora"
-    echo -e "\n $RED -------------\n"
-     
-    if [ - /etc/yum.repos.d/ftor.repo ]; then
-      mv /tmp/anonsurf/ftor.repo /etc/yum.repos.d/
-    fi
+        if [ -f /etc/network/ ];then 
+        mkdir /etc/network
+        toch /etc/network/iptables.rules
+        fi   
 
-    dnf update -y
-    dnf config-manager --set-enabled PowerTools -y
-    dnf install tor dpkg -y
-    dnf install -y
-    
-    if [ -f /etc/network/ ];then 
-       mkdir /etc/network
-       touch /etc/network/iptables.rules
-    fi   
+
 
 #elif SUSE | Arch
 
