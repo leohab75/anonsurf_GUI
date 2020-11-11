@@ -1,7 +1,7 @@
 #!/bin/bash
 rm -fv /usr/share/applications/anonsurf.desktop   /home/$USER/'Рабочий стол'/Anonsurf
 
-
+$RED
 rm -fv /etc/init.d/anonsurf.sh
 rm -fv /usr/share/applications/anonsurf.desktop
 rm -fv /usr/share/applications/Uninstall-Anonsurf.desktop
