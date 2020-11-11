@@ -40,7 +40,7 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
      
      
     apt update && apt deb.torproject.org-keyring -y
-    aptutude install tor  -y
+    aptitude install tor  -y
     dpkg --configure -a
 
     
@@ -138,13 +138,13 @@ if [ -e /etc/tor/torrc.anon ]; then
  mv /etc/tor/torrc.anon /etc/tor/torrc
 fi
 
-systemctl start tor
-tor -f /etc/tor/torrc
 
 if [ -f /lib/systemd/system/tor.service ]; then
  rm -fv /lib/systemd/system/tor.service
  mv /tmp/anonsurf/tor.service /lib/systemd/system/tor.service
 fi 
+
+tor -f /etc/tor/torrc
 
 chmod +x /etc/init.d/anonsurf
 chmod +x /usr/share/applications/anonsurf.desktop
