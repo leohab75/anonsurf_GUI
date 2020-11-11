@@ -37,7 +37,7 @@ then
     echo -e "\n $GREEN or rhel"
     echo -e "\n $RED -------------"
     
-    mv ctor.repo /etc/yum.repos.d/
+    mv /tmp/anonsurf/ctor.repo /etc/yum.repos.d/
     dnf install tor dpkg -y
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     dnf config-manager --set-enabled PowerTools -y
@@ -52,7 +52,7 @@ then
     echo -e "\n $GREEN fedora"
     echo -e "\n $RED -------------"
      
-    mv ftor.repo /etc/yum.repos.d/
+    mv /tmp/anonsurf/ftor.repo /etc/yum.repos.d/
     dnf config-manager --set-enabled PowerTools -y
     dnf install tor dpkg epel-release -y
     
