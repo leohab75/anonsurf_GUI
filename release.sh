@@ -39,7 +39,8 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
      gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
      
      
-    apt update && apt install tor deb.torproject.org-keyring -y && apt install -f
+    apt update && apt deb.torproject.org-keyring -y
+    aptutude install tor  -y
     dpkg --configure -a
 
     
