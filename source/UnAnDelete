@@ -1,11 +1,11 @@
 #!/bin/bash
-rm -fv /usr/share/applications/anonsurf.desktop   /home/$USER/'Рабочий стол'/Anonsurf
+rm -fv /home/$USER/'Рабочий стол'/Anonsurf
 
 $RED
-rm -fv /etc/init.d/anonsurf.sh
+rm -fv /etc/init.d/anonsurf
 rm -fv /usr/share/applications/anonsurf.desktop
 rm -fv /usr/share/applications/Uninstall-Anonsurf.desktop
-rm -fv /etc/tor/torrc.anon 
+rm -fv /etc/tor/torrc 
 rm -fv /etc/tor/onion.pac   
 rm -fv /etc/systemd/system/anonsurf.service
 rm -fv /usr/bin/Anon  

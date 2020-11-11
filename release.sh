@@ -35,7 +35,7 @@ then
     echo -e "\n $RED -------------"
     echo -e "Relese OS: "
     echo -e "\n $GREEN CentOs | rhel"
-    echo -e "\n $RED -------------"
+    echo -e "\n $RED -------------\n"
     
     mv /tmp/anonsurf/ctor.repo /etc/yum.repos.d/
     dnf update -y
@@ -55,7 +55,7 @@ then
     echo -e "\n $RED -------------"
     echo -e "Relese OS: "
     echo -e "\n $GREEN fedora"
-    echo -e "\n $RED -------------"
+    echo -e "\n $RED -------------\n"
      
     mv /tmp/anonsurf/ftor.repo /etc/yum.repos.d/
     dnf update -y
