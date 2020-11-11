@@ -13,8 +13,8 @@ cp -v  $(pwd)/source/onion.pac /tmp/anonsurf/
 cp -v  $(pwd)/source/anonsurf.service /tmp/anonsurf/
 cp -v  $(pwd)/source/Anon /tmp/anonsurf/
 cp -v  $(pwd)/source/UnAnonsurf /tmp/anonsurf/
-cp -v  $(pwd)/source/UnAnDelete.sh /tmp/anonsurf/
-cp -v  $(pwd)/source/anonsurf.sh /tmp/anonsurf/
+cp -v  $(pwd)/source/UnAnDelete /tmp/anonsurf/
+cp -v  $(pwd)/source/anonsurf /tmp/anonsurf/
 cp -v  $(pwd)/source/anon.png /tmp/anonsurf/
 
 # Добавляем репозитории и
