@@ -34,10 +34,10 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
           
         echo -e "\n $RED -------------"
         echo -e "Relese OS: "
-        echo -e "\n $GREEN debian based: по умолчанию buster  "
+        echo -e "\n $GREEN debian based: по умолчанию stretch  "
         echo -e "\n $RED -------------"
 
-        release="buster"
+        release="stretch"
 
     fi
           
@@ -131,7 +131,7 @@ rm -fv /usr/share/pixmaps/anon.png
 
 
 
-echo -e "\n$GREEN копируем в рабочие каталоги \n"
+echo -e "\n$GREEN копирование в рабочие каталоги \n"
 cp -v /tmp/anonsurf/anonsurf.desktop /usr/share/applications/
 cp -v /tmp/anonsurf/Uninstall-Anonsurf.desktop /usr/share/applications/
 cp -v /tmp/anonsurf/torrc.anon /etc/tor/
