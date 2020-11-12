@@ -21,7 +21,7 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
         
         release=$(lsb_release -c | awk '{print $ 2}')
 
-    else
+    elif [[ -n  $(cat /etc/os-release |  grep -i ubuntu) ]]; then
 
         echo -e "\n $RED -------------"
         echo -e "Relese OS: "
@@ -30,9 +30,18 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
 
         release=$(cat /etc/os-release | grep -i UBUNTU_CODENAME | sed -r 's/.{,16}//')
             
-    fi
+    else
+          
+        echo -e "\n $RED -------------"
+        echo -e "Relese OS: "
+        echo -e "\n $GREEN debian based: по умолчанию buster  "
+        echo -e "\n $RED -------------"
 
-    echo -e "\n$GREEN Добавление репозитория и установка Тор\n"
+        release="buster"
+
+    fi
+          
+            echo -e "\n$GREEN Добавление репозитория и установка Тор\n"
 
     apt install apt-transport-https wget zenity aptitude -y
     rm -fv /etc/apt/sources.list.d/tor.list
