@@ -5,7 +5,7 @@ GUI for Anonsurf
 
 На данном этапе поддерживаются: Debian, Ubuntu, Fedora, CentOs, RHEL  и их производные.
 
-Установка:  
+Установка:  sudo apt install или git sudo yum install git
 
 git clone https://github.com/leohab75/anonsurf_GUI.git && cd anonsurf_GUI/ && sh install.sh
 
