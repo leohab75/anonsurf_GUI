@@ -3,7 +3,7 @@ GUI for Anonsurf
 
 Простая и интуинтивно понятная утилита для анонимного сёрфига интернетов..
 
-На данном этапе поддерживаются: Debian, Ubuntu и их производные.
+На данном этапе поддерживаются: Debian, Ubuntu, Fedora, CentOs, RHEL  и их производные.
 
 Установка:  
 
@@ -23,11 +23,15 @@ git clone https://github.com/leohab75/anonsurf_GUI.git && cd anonsurf_GUI/ && sh
 
 В терминале будут доступны команды : 
 
-Anon 
+Anon  // для вызова меню пользователя
 
 и 
 
-UnAnonsurf
+UnAnonsurf  //для удаления программы
+
+управление утилитой из терминала распологается в 
+
+/etc/init.d/anonsurf --help
 
 
 
