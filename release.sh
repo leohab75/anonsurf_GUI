@@ -34,10 +34,11 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
           
         echo -e "\n $RED -------------"
         echo -e "Relese OS: "
-        echo -e "\n $GREEN debian based: по умолчанию stretch  "
+        echo -e "\n $GREEN debian based: по умолчанию  'stretch'  "
         echo -e "\n $RED -------------"
 
         release="stretch"
+        apt install resolvconf -y
 
     fi
           

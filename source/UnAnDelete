@@ -13,9 +13,9 @@ rm -fv /us/bin/UnAnonsurf
 rm -fv /etc/init.d/UnAnDelete
 rm -fv /usr/share/pixmaps/anon.png  
 
-if [[ -n  $(cat /etc/os-release |  grep -i ID=debian) || $(cat /etc/os-release |  grep -i ID=ubuntu) ]] ;
+if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu) ]] ;
 then
-    aptitude purge tor -y
+    aptitude remove tor -y
 else
     dnf remove tor -y 
 fi 
