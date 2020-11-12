@@ -91,8 +91,8 @@ function start {
 	echo -e "\n$GREEN[$BLUE i$GREEN ]$BLUE Stopping IPv6 services:$RESETCOLOR\n"
 	sed -i '/^.*\#anonsurf$/d' /etc/sysctl.conf #delete lines containing #anonsurf in /etc/sysctl.conf
 	# add lines to sysctl.conf that will kill ipv6 services
-	echo "net.ipv6.conf.all.disable_ipv6 = 1 #kali-anonsurf" >> /etc/sysctl.conf
-	echo "net.ipv6.conf.default.disable_ipv6=1 #kali-anonsurf" >> /etc/sysctl.conf
+	echo "net.ipv6.conf.all.disable_ipv6 = 1 #anonsurf" >> /etc/sysctl.conf
+	echo "net.ipv6.conf.default.disable_ipv6=1 #anonsurf" >> /etc/sysctl.conf
 	sysctl -p > /dev/null  # have sysctl reread /etc/sysctl.conf
 
 	echo -e "\n$GREEN[$BLUE i$GREEN ]$BLUE Starting anonymous mode:$RESETCOLOR\n"
@@ -242,7 +242,7 @@ case "$1" in
 	;;
    *)
 echo -e "
-Parrot AnonSurf Module
+AnonSurf Module
 	Usage:
 	$RED┌──[$GREEN$USER$YELLOW@$BLUE`hostname`$RED]─[$GREEN$PWD$RED]
 	$RED└──╼ \$$GREEN"" anonsurf $RED{$GREEN""start$RED|$GREEN""stop$RED|$GREEN""restart$RED|$GREEN""change$RED""$RED|$GREEN""status$RED""}

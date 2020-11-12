@@ -1,10 +1,13 @@
 #!/bin/bash
 
+
+export BLUE='\033[1;94m'
 export GREEN='\033[1;92m'
 export RED='\033[1;91m'
 export RESETCOLOR='\033[1;00m'
 
-#Качаем и устанавливаем Тор
+
+echo -e "\n $BLUE Определятся версия ОС \n"
 
 if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu) ]]; then 
     
@@ -29,6 +32,7 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
             
     fi
 
+    echo -e "\n$GREEN Добавление репозитория и установка Тор\n"
 
     apt install apt-transport-https wget zenity aptitude -y
     rm -fv /etc/apt/sources.list.d/tor.list
@@ -58,7 +62,7 @@ elif [[ -n $(cat /etc/os-release |  grep -i ID=centos) || $(cat /etc/os-release 
         echo -e "\n $RED -------------\n"
 
             if [ -f /etc/yum.repos.d/ftor.repo ]; then
-            mv /tmp/anonsurf/ftor.repo /etc/yum.repos.d/
+            mv -v /tmp/anonsurf/ftor.repo /etc/yum.repos.d/
             fi
 
     else
@@ -69,13 +73,14 @@ elif [[ -n $(cat /etc/os-release |  grep -i ID=centos) || $(cat /etc/os-release 
         echo -e "\n $RED -------------\n"
 
             if [ -f /etc/yum.repos.d/ctor.repo ]; then
-            mv /tmp/anonsurf/ctor.repo /etc/yum.repos.d/
+            mv -v /tmp/anonsurf/ctor.repo /etc/yum.repos.d/
             fi
 
 
     fi
 
-     
+    echo -e "\n$GREEN Добавление репозитория и установка Тор\n"
+
     dnf update -y
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     dnf config-manager --set-enabled PowerTools -y
@@ -102,7 +107,7 @@ else
 fi
 
 
-echo -e " $GREEN*$BLUE"
+echo -e "\n $GREEN*$BLUE подготовка перед копированием \n"
 #подготовим почву
 rm -fv /etc/init.d/anonsurf
 rm -fv /usr/share/applications/anonsurf.desktop
@@ -116,7 +121,8 @@ rm -fv /etc/init.d/UnAnDelete
 rm -fv /usr/share/pixmaps/anon.png  
 
 
-#распихиваем по каталогам
+
+echo -e "\n$GREEN копируем в рабочие каталоги \n"
 cp -v /tmp/anonsurf/anonsurf.desktop /usr/share/applications/
 cp -v /tmp/anonsurf/Uninstall-Anonsurf.desktop /usr/share/applications/
 cp -v /tmp/anonsurf/torrc.anon /etc/tor/
@@ -132,16 +138,16 @@ cp -v /tmp/anonsurf/anon.png /usr/share/pixmaps/
 
 #postinst
 if [ -e /etc/tor/torrc ]; then
- mv /etc/tor/torrc /etc/tor/torrc.orig
+ mv -v /etc/tor/torrc /etc/tor/torrc.orig
 fi
 if [ -e /etc/tor/torrc.anon ]; then
- mv /etc/tor/torrc.anon /etc/tor/torrc
+ mv -v /etc/tor/torrc.anon /etc/tor/torrc
 fi
 
 
 if [ -f /lib/systemd/system/tor.service ]; then
  rm -fv /lib/systemd/system/tor.service
- mv /tmp/anonsurf/tor.service /lib/systemd/system/tor.service
+ mv -v /tmp/anonsurf/tor.service /lib/systemd/system/tor.service
 fi 
 
 tor -f /etc/tor/torrc
@@ -155,6 +161,5 @@ chmod +x /usr/bin/UnAnonsurf
 chmod +x /etc/init.d/UnAnDelete
 chmod +x /usr/share/pixmaps/anon.png  
 
-echo -e "\n $GREEN Установка звершена с кодом: $RED $? $RESETCOLOR\n"
 
 exit 0;

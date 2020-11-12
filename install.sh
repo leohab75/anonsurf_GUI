@@ -7,9 +7,9 @@ export RESETCOLOR='\033[1;00m'
 
 rm -rf /tmp/anonsurf
 
-#временный рабочий катаолог
 mkdir /tmp/anonsurf
-echo -e "$GREEN*$RED"
+echo -e "\n$GREEN*$RED миграция во временный каталог \n"
+
 cp -v  $(pwd)/source/anonsurf.desktop /tmp/anonsurf/
 cp -v  $(pwd)/source/Uninstall-Anonsurf.desktop /tmp/anonsurf/
 cp -v  $(pwd)/source/torrc.anon /tmp/anonsurf/
@@ -24,7 +24,7 @@ cp -v  $(pwd)/source/tor.service /tmp/anonsurf/
 cp -v  $(pwd)/source/ctor.repo /tmp/anonsurf/
 cp -v  $(pwd)/source/ftor.repo /tmp/anonsurf/
 
-echo -e "\n $RESETCOLOR \n"
+
 # Добавляем репозитории и
 # устанавливаем Тор
 pkexec bash $(pwd)/release.sh 
@@ -40,11 +40,11 @@ update-icon-caches /usr/share/pixmaps/*
 #ярлык на рабочий стол
 ln -s  /usr/share/applications/anonsurf.desktop   /home/$USER/'Рабочий стол'/Anonsurf
 
-#удаляем  вреенный каталог
-rm -rf /tmp/anonsurf
+echo -e "\n Удаляется временный каталог \n"
+rm -rfv /tmp/anonsurf
 
 
-
+echo -e "\n $GREEN Установка звершена с кодом: $RED $? $RESETCOLOR\n"
 
 exit 0;
 
