@@ -3,12 +3,12 @@
 export GREEN='\033[1;92m'
 export RED='\033[1;91m'
 export RESETCOLOR='\033[1;00m'
-
+export BLUE='\033[1;94m'
 
 rm -rf /tmp/anonsurf
 
 mkdir /tmp/anonsurf
-echo -e "\n$GREEN*$RED миграция во временный каталог \n"
+echo -e "\n$GREEN*$BLUE миграция во временный каталог \n$RESETCOLOR"
 
 cp -v  $(pwd)/source/anonsurf.desktop /tmp/anonsurf/
 cp -v  $(pwd)/source/Uninstall-Anonsurf.desktop /tmp/anonsurf/
@@ -40,7 +40,7 @@ update-icon-caches /usr/share/pixmaps/*
 #ярлык на рабочий стол
 ln -s  /usr/share/applications/anonsurf.desktop   /home/$USER/'Рабочий стол'/Anonsurf
 
-echo -e "\n Удаляется временный каталог \n"
+echo -e "\n$GREEN*$BLUE Удаляется временный каталог \n$RESETCOLOR"
 rm -rfv /tmp/anonsurf
 
 
