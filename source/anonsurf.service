@@ -5,9 +5,9 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/anonsurf start
-ExecReload=/usr/bin/anonsurf restart
-ExecStop=/usr/bin/anonsurf stop
+ExecStart=/usr/bin/Anon start
+ExecReload=/usr/bin/Anon restart
+ExecStop=/usr/bin/Anon stop
 RemainAfterExit=True
 
 
