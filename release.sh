@@ -7,7 +7,7 @@ export RED='\033[1;91m'
 export RESETCOLOR='\033[1;00m'
 
 
-echo -e "\n $BLUE Определятся версия ОС \n"
+echo -e "\n $GREEN*$BLUE Определятся версия ОС \n"
 
 if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu) ]]; then 
     
@@ -42,7 +42,7 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
 
     fi
           
-            echo -e "\n$GREEN Добавление репозитория и установка Тор\n"
+            echo -e "\n$GREEN Добавление репозитория и установка Тор\n$RESETCOLOR"
 
     apt install apt-transport-https wget zenity aptitude -y
     rm -fv /etc/apt/sources.list.d/tor.list
@@ -53,7 +53,7 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
      gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
      
      
-    apt update && apt deb.torproject.org-keyring -y
+    apt update && apt install deb.torproject.org-keyring -y
     aptitude install tor  -y
     dpkg --configure -a
 
@@ -89,7 +89,7 @@ elif [[ -n $(cat /etc/os-release |  grep -i ID=centos) || $(cat /etc/os-release 
 
     fi
 
-    echo -e "\n$GREEN Добавление репозитория и установка Тор\n"
+    echo -e "\n$GREEN Добавление репозитория и установка Тор\n$RESETCOLOR"
 
     dnf update -y
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
@@ -117,7 +117,7 @@ else
 fi
 
 
-echo -e "\n $GREEN*$BLUE подготовка перед копированием \n"
+echo -e "\n $GREEN*$BLUE подготовка перед копированием \n$RESETCOLOR"
 #подготовим почву
 rm -fv /etc/init.d/anonsurf
 rm -fv /usr/share/applications/anonsurf.desktop
@@ -132,7 +132,7 @@ rm -fv /usr/share/pixmaps/anon.png
 
 
 
-echo -e "\n$GREEN копирование в рабочие каталоги \n"
+echo -e "\n$GREEN*$BLUE копирование в рабочие каталоги \n$RESETCOLOR"
 cp -v /tmp/anonsurf/anonsurf.desktop /usr/share/applications/
 cp -v /tmp/anonsurf/Uninstall-Anonsurf.desktop /usr/share/applications/
 cp -v /tmp/anonsurf/torrc.anon /etc/tor/
