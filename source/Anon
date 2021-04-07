@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+while true
+do
 #меню утилиты
 menu=$(zenity --list --text="Функционал"\
         --radiolist --column "Pick" --column "Anonsurf"\
@@ -9,18 +12,25 @@ menu=$(zenity --list --text="Функционал"\
         FALSE  "change"\
         FALSE  "status"\
         --height=300)
+        
+if [ $? = 0 ]; then
  
-if [ $menu == "status" ]; then
-        IP=$(wget -qO- eth0.me)
-        active=$(systemctl status tor | grep -i Active)
-        zenity --info --text="Ваш текущий IP адрес: $IP \n\
-                Статус сети Тор \n\
-                $active "\
-                --height=200 --width=200
-else
+    if [ $menu = "status" ]; then
+            IP=$(wget -qO- eth0.me)
+            active=$(systemctl status tor | grep -i Active)
+            zenity --info --text="Ваш текущий IP адрес: $IP \n\
+                    Статус сети Тор \n\
+                    $active "\
+                    --height=200 --width=200
+    else
 
-        pkexec bash /etc/init.d/anonsurf $menu
+            pkexec bash /etc/init.d/anonsurf $menu
+    fi
+
+else break ;
+
 fi
+done
 
 #сообщение статуса сети Тор
 notifi=$(systemctl status tor | grep -i Active)
