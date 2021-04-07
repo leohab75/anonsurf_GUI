@@ -126,7 +126,7 @@ rm -fv /etc/tor/torrc.anon
 rm -fv /etc/tor/onion.pac   
 rm -fv /etc/systemd/system/anonsurf.service
 rm -fv /usr/bin/Anon 
-rm -fv /us/bin/UnAnonsurf
+rm -fv /usr/bin/UnAnonsurf
 rm -fv /etc/init.d/UnAnDelete
 rm -fv /usr/share/pixmaps/anon.png  
 
