@@ -219,11 +219,11 @@ function status {
 	
 case "$1" in
 	start)
-		init
+		#init
 		start
 	;;
 	stop)
-		init
+		#init
 		stop
 	;;
 	change)
