@@ -169,7 +169,9 @@ chmod +x /etc/systemd/system/anonsurf.service
 chmod +x /usr/bin/Anon  
 chmod +x /usr/bin/UnAnonsurf
 chmod +x /etc/init.d/UnAnDelete
-chmod +x /usr/share/pixmaps/anon.png  
+
+update-desktop-database && update-icon-caches /usr/share/pixmaps/*
+
 
 
 exit 0;
