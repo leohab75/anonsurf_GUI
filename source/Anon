@@ -6,11 +6,11 @@ do
 #меню утилиты
 menu=$(zenity --list --text="Функционал"\
         --radiolist --column "Pick" --column "Anonsurf"\
-        True   "start"\
+        FALSE  "start"\
         FALSE  "stop"\
         FALSE  "restart"\
         FALSE  "change"\
-        FALSE  "status"\
+        True  "status"\
         --height=300)
         
 if [ $? = 0 ]; then
