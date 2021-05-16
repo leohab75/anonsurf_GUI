@@ -245,7 +245,7 @@ echo -e "
 AnonSurf Module
 	Usage:
 	$RED┌──[$GREEN$USER$YELLOW@$BLUE`hostname`$RED]─[$GREEN$PWD$RED]
-	$RED└──╼ \$$GREEN"" anonsurf $RED{$GREEN""start$RED|$GREEN""stop$RED|$GREEN""restart$RED|$GREEN""change$RED""$RED|$GREEN""status$RED""}
+	$RED└──╼ \$$GREEN"" /etc/init.d/anonsurf $RED{$GREEN""start$RED|$GREEN""stop$RED|$GREEN""restart$RED|$GREEN""change$RED""$RED|$GREEN""status$RED""}
 	
 	$RED start$BLUE -$GREEN Start system-wide anonymous
 		  tunneling under TOR proxy through iptables	  
