@@ -6,7 +6,7 @@ rm -fv /etc/init.d/anonsurf
 rm -fv /usr/share/applications/anonsurf.desktop
 rm -fv /usr/share/applications/Uninstall-Anonsurf.desktop
 rm -fv /etc/tor/torrc 
-rm -fv /etc/tor/torrc.origin
+rm -fv /etc/tor/torrc.orig
 rm -fv /etc/tor/onion.pac   
 rm -fv /etc/systemd/system/anonsurf.service
 rm -fv /usr/bin/Anon  
