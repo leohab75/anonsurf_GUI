@@ -42,6 +42,11 @@ export GREEN='\033[1;92m'
 export RED='\033[1;91m'
 export RESETCOLOR='\033[1;00m'
 
+if [[ $EUID -ne 0 ]]; then
+   echo -e -n " $GREEN*$BLUE "this script must be run as root" $RESETCOLOR\n"
+   exit 1
+fi
+
 # Destinations you don't want routed through Tor
 TOR_EXCLUDE="192.168.0.0/16 172.16.0.0/12 10.0.0.0/8"
 
@@ -258,7 +263,7 @@ AnonSurf Module
 	
 
 $RESETCOLOR" >&2
-exit 1
+exit 2
 ;;
 esac
 
