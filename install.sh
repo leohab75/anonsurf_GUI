@@ -6,7 +6,7 @@ export RESETCOLOR='\033[1;00m'
 export BLUE='\033[1;94m'
 
 if [ -f /tmp/anonsurf ]; then
-rm -rv /tmp/anonsurf
+rm -rfv /tmp/anonsurf
 fi
 
 
