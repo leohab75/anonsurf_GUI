@@ -59,11 +59,11 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
 
     
     
-elif [[ -n $(cat /etc/os-release |  grep -i ID=centos) || $(cat /etc/os-release |  grep -i ID=rhel) || $(cat /etc/os-release |  grep -i ID=fedora) ]]; then 
+elif [[ -n $(cat /etc/os-release |  grep -i centos) || $(cat /etc/os-release |  grep -i rhel) || $(cat /etc/os-release |  grep -i fedora) ]]; then 
 
 
 
-    if [[ -n $(cat /etc/os-release |  grep -i ID=fedora) ]] ;then
+    if [[ -n $(cat /etc/os-release |  grep -i fedora) ]] ;then
 
 
         echo -e "\n $RED -------------"
