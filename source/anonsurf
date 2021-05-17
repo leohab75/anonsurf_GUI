@@ -98,7 +98,6 @@ function start {
 	if [ ! -e /var/run/tor/tor.pid ]; then
 		echo -e " $RED*$BLUE Tor is not running! $GREEN starting it $BLUE for you$RESETCOLOR\n" >&2
 		service NetworkManager force-reload > /dev/null 2>&1 || service network-manager force-reload  > /dev/null 2>&1 
-		ufw disable > /dev/null 2>&1
 		killall dnsmasq > /dev/null 2>&1
 		killall nscd > /dev/null 2>&1	
 		service tor start
@@ -113,7 +112,7 @@ function start {
 	iptables -t nat -F
 	
 	#dns resolv
-	cp /etc/resolv.conf /etc/resolv.conf.bak
+	mv /etc/resolv.conf /etc/resolv.conf.bak
 	touch /etc/resolv.conf
 	echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 1.1.1.1' > /etc/resolv.conf
 	echo -e " $GREEN*$BLUE Modified resolv.conf to use Tor and Private Internet Access DNS"
@@ -173,9 +172,9 @@ function stop {
 	fi
 	
 	# restore DNS settings
-	if [ -e /etc/resolv.conf.bak ]; then
+	if [ -f /etc/resolv.conf.bak ]; then
 		rm /etc/resolv.conf
-		cp /etc/resolv.conf.bak /etc/resolv.conf
+		mv /etc/resolv.conf.bak /etc/resolv.conf
 		resolvconf -u
 	fi
 	
@@ -189,7 +188,6 @@ function stop {
 	sysctl -p # have sysctl reread /etc/sysctl.conf
 
 	service NetworkManager force-reload > /dev/null 2>&1 || service network-manager force-reload  > /dev/null 2>&1
-	ufw enable > /dev/null 2>&1
 	service nscd start > /dev/null 2>&1
 	service dnsmasq start > /dev/null 2>&1
 	
