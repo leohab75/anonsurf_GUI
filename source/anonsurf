@@ -105,6 +105,7 @@ function start {
 	if [ ! -e /var/run/tor/tor.pid ]; then
 		echo -e " $RED*$BLUE Tor is not running! $GREEN starting it $BLUE for you$RESETCOLOR\n" >&2
 		service NetworkManager force-reload > /dev/null 2>&1 || service network-manager force-reload  > /dev/null 2>&1 
+		ufw disable > /dev/null 2>&1
 		killall dnsmasq > /dev/null 2>&1
 		killall nscd > /dev/null 2>&1	
 		service tor start
@@ -203,7 +204,8 @@ function stop {
 	sed -i '/^.*\#anonsurf$/d' /etc/sysctl.conf #delete lines containing #anonsurf in /etc/sysctl.conf
 	sysctl -p # have sysctl reread /etc/sysctl.conf
 
-	service NetworkManager force-reload > /dev/null 2>&1 || service network-manager force-reload  > /dev/null 2>&1 
+	service NetworkManager force-reload > /dev/null 2>&1 || service network-manager force-reload  > /dev/null 2>&1
+	ufw enable > /dev/null 2>&1
 	service nscd start > /dev/null 2>&1
 	service dnsmasq start > /dev/null 2>&1
 	
