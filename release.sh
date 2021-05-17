@@ -92,12 +92,12 @@ elif [[ -n $(cat /etc/os-release |  grep -i centos) || $(cat /etc/os-release |  
     echo -e "\n$GREEN Добавление репозитория и установка Тор\n$RESETCOLOR"
 
     dnf update -y
-    yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
     dnf config-manager --set-enabled PowerTools -y
     dnf install tor dpkg -y
     dnf install epel-release -y 
    
-        if [ -f /etc/network/ ];then 
+        if [ -e /etc/network/ ];then 
         mkdir /etc/network
         toch /etc/network/iptables.rules
         fi   
@@ -147,7 +147,7 @@ cp -v /tmp/anonsurf/anon.png /usr/share/pixmaps/
       
 
 #postinst
-if [ -e /etc/tor/torrc ]; then
+if [ -f /etc/tor/torrc ]; then
  mv -v /etc/tor/torrc /etc/tor/torrc.orig
 fi
 if [ -e /etc/tor/torrc.anon ]; then
