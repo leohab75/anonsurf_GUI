@@ -117,6 +117,7 @@ function start {
 	touch /etc/resolv.conf
 	echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 1.1.1.1' > /etc/resolv.conf
 	echo -e " $GREEN*$BLUE Modified resolv.conf to use Tor and Private Internet Access DNS"
+	resolvconf -u
 	
 
 	# set iptables nat
@@ -175,6 +176,7 @@ function stop {
 	if [ -e /etc/resolv.conf.bak ]; then
 		rm /etc/resolv.conf
 		cp /etc/resolv.conf.bak /etc/resolv.conf
+		resolvconf -u
 	fi
 	
 	
