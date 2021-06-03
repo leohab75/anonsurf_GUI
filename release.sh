@@ -54,7 +54,7 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
      
      
     apt update && apt install deb.torproject.org-keyring -y
-    aptitude install tor  -y
+    aptitude install tor bleachbit -y
     dpkg --configure -a
 
     
@@ -68,7 +68,7 @@ elif [[ -n $(cat /etc/os-release |  grep -i centos) || $(cat /etc/os-release |  
 
         echo -e "\n $RED -------------"
         echo -e "Relese OS: "
-        echo -e "\n $GREEN fedora"
+        echo -e "\n $GREEN fedora | Rhel "
         echo -e "\n $RED -------------\n"
 
             if [ -f /etc/yum.repos.d/ftor.repo ]; then
@@ -79,7 +79,7 @@ elif [[ -n $(cat /etc/os-release |  grep -i centos) || $(cat /etc/os-release |  
 
         echo -e "\n $RED -------------"
         echo -e "Relese OS: "
-        echo -e "\n $GREEN CentOs | rhel"
+        echo -e "\n $GREEN CentOs "
         echo -e "\n $RED -------------\n"
 
             if [ -f /etc/yum.repos.d/ctor.repo ]; then
@@ -94,12 +94,12 @@ elif [[ -n $(cat /etc/os-release |  grep -i centos) || $(cat /etc/os-release |  
     dnf update -y
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
     dnf config-manager --set-enabled PowerTools -y
-    dnf install tor -y
+    dnf install tor bleachbit -y
     dnf install epel-release -y 
    
-        if [ -e /etc/network/ ];then 
+        if [ ! -e /etc/network ]; then 
         mkdir /etc/network
-        toch /etc/network/iptables.rules
+        touch /etc/network/iptables.rules
         fi   
 
 
