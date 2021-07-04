@@ -46,7 +46,7 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
 
     apt install apt-transport-https wget zenity aptitude -y
     rm -fv /etc/apt/sources.list.d/tor.list
-    echo "deb https://deb.torproject.org/torproject.org $release main" > /etc/apt/sources.list.d/tor.list
+    echo "deb [arch=amd64] https://deb.torproject.org/torproject.org tor-nightly-master-$release main" > /etc/apt/sources.list.d/tor.list
      
      
      wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
@@ -54,18 +54,16 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
      
      
     apt update && apt install deb.torproject.org-keyring -y
-    aptitude install tor bleachbit -y
+    aptitude install tor bleachbit resolvconf -y
     dpkg --configure -a
 
     
     
-elif [[ -n $(cat /etc/os-release |  grep -i centos) || $(cat /etc/os-release |  grep -i rhel) || $(cat /etc/os-release |  grep -i fedora) ]]; then 
+elif [[ -n  $(cat /etc/os-release |  grep -i fedora) ]]; then 
 
 
 
-    if [[ -n $(cat /etc/os-release |  grep -i fedora) ]] ;then
-
-
+  
         echo -e "\n $RED -------------"
         echo -e "Relese OS: "
         echo -e "\n $GREEN fedora | Rhel "
@@ -75,19 +73,7 @@ elif [[ -n $(cat /etc/os-release |  grep -i centos) || $(cat /etc/os-release |  
             mv -v /tmp/anonsurf/ftor.repo /etc/yum.repos.d/
             fi
 
-    else
-
-        echo -e "\n $RED -------------"
-        echo -e "Relese OS: "
-        echo -e "\n $GREEN CentOs "
-        echo -e "\n $RED -------------\n"
-
-            if [ -f /etc/yum.repos.d/ctor.repo ]; then
-            mv -v /tmp/anonsurf/ctor.repo /etc/yum.repos.d/
-            fi
-
-
-    fi
+   
 
     echo -e "\n$GREEN Добавление репозитория и установка Тор\n$RESETCOLOR"
 
