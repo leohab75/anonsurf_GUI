@@ -90,9 +90,9 @@ elif [[ -n  $(cat /etc/os-release |  grep -i fedora) ]]; then
    
    #попытка настроить днс
    dnf remove resolvconf -y
-   wget http://roy.marples.name/downloads/openresolv/openresolv-3.9.2.tar.bz2
-   tar fxjv openresolv-3.9.2.tar.bz2
-   cd openresolv-3.9.2
+   wget http://roy.marples.name/downloads/openresolv/openresolv-3.7.0.tar.bz2
+   tar fxjv openresolv-3.7.0.tar.bz2
+   cd openresolv-3.7.0
    wget http://www.grid-appliance.org/files/packages/openresolv_patch.zip
    unzip openresolv_patch.zip
    make
