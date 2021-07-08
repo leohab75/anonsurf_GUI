@@ -83,11 +83,22 @@ elif [[ -n  $(cat /etc/os-release |  grep -i fedora) ]]; then
     dnf install tor bleachbit zenity -y
      
    
-        if [ ! -e /etc/network ]; then 
+        if [ ! -f /etc/network/iptables.rules ]; then 
         mkdir /etc/network
         touch /etc/network/iptables.rules
         fi   
-
+   
+   #попытка настроить днс
+   dnf remove resolvconf -y
+   wget http://roy.marples.name/downloads/openresolv/openresolv-3.9.2.tar.bz2
+   tar fxjv openresolv-3.9.2.tar.bz2
+   cd openresolv-3.9.2
+   wget http://www.grid-appliance.org/files/packages/openresolv_patch.zip
+   unzip openresolv_patch.zip
+   make
+   ./patch.sh
+   make install
+   
 
 
 #elif SUSE | Arch
