@@ -77,11 +77,11 @@ elif [[ -n  $(cat /etc/os-release |  grep -i fedora) ]]; then
 
     echo -e "\n$GREEN Добавление репозитория и установка Тор\n$RESETCOLOR"
 
-    dnf update -y
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
-    dnf config-manager --set-enabled PowerTools -y
+    dnf check-update
+    dnf install epel-release -y
     dnf install tor bleachbit zenity -y
-    dnf install epel-release -y 
+     
    
         if [ ! -e /etc/network ]; then 
         mkdir /etc/network
