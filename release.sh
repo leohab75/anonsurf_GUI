@@ -89,7 +89,9 @@ elif [[ -n  $(cat /etc/os-release |  grep -i fedora) ]]; then
         touch /etc/network/iptables.rules
         fi   
    
-   #чиним DNS
+   
+   echo -e "\n$GREEN Чиним DNS => $RED resolvconf\n$RESETCOLOR"
+  
    wget http://roy.marples.name/downloads/openresolv/openresolv-3.7.0.tar.bz2
    tar fxjv openresolv-3.7.0.tar.bz2
    cd openresolv-3.7.0
