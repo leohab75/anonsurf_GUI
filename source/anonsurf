@@ -52,7 +52,7 @@ TOR_EXCLUDE="192.168.0.0/16 172.16.0.0/12 10.0.0.0/8"
 
 # The UID Tor runs as
 # change it if, starting tor, the command 'ps -e | grep tor' returns a different UID
-TOR_UID="debian-tor"
+TOR_UID=$(users)
 
 # Tor's TransPort
 TOR_PORT="9040"
@@ -100,7 +100,7 @@ function start {
 		service NetworkManager force-reload > /dev/null 2>&1 || service network-manager force-reload  > /dev/null 2>&1 
 		killall dnsmasq > /dev/null 2>&1
 		killall nscd > /dev/null 2>&1	
-		service tor start
+		systemctl start tor
 		sleep 1
 	fi
 	if  [ -f /etc/network/iptables.rules ]; then
@@ -179,7 +179,7 @@ function stop {
 	fi
 	
 	
-	service tor stop
+	systemctl stop tor
 	
 	echo -e "\n$GREEN[$BLUE i$GREEN ]$BLUE Reenabling IPv6 services:$RESETCOLOR\n"
 
@@ -195,7 +195,7 @@ function stop {
 }
 
 function change {
-	service tor reload
+	systemctl reload tor
 	sleep 2
 	echo -e " $GREEN*$BLUE Tor daemon reloaded and forced to change nodes$RESETCOLOR\n"
 }

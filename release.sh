@@ -98,7 +98,30 @@ elif [[ -n  $(cat /etc/os-release |  grep -i fedora) ]]; then
    make
    make install
 
-#elif SUSE | Arch
+elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then 
+
+
+
+  
+        echo -e "\n $RED -------------"
+        echo -e "Relese OS: "
+        echo -e "\n $GREEN Arch Linux | Manjaro "
+        echo -e "\n $RED -------------\n"
+
+            
+
+   
+
+    echo -e "\n$GREEN установка Тор\n$RESETCOLOR"
+
+        sudo pacman -Sy --noconfirm tor sudo torsocks bleachbit zenity 
+
+        if [ ! -f /etc/init.d ]; then 
+        mkdir /etc/init.d
+        fi   
+
+
+
 
 else 
 
@@ -154,7 +177,11 @@ if [ -f /lib/systemd/system/tor.service ]; then
  mv -v /tmp/anonsurf/tor.service /lib/systemd/system/tor.service
 fi 
 
+
+echo -e "\n$GREEN включение сервиса Тор\n$RESETCOLOR"
+
 tor -f /etc/tor/torrc
+systemctl enable --now tor.service
 
 chmod +x /etc/init.d/anonsurf
 chmod +x /usr/share/applications/anonsurf.desktop
