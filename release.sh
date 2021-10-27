@@ -114,7 +114,7 @@ elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then
 
     echo -e "\n$GREEN установка Тор\n$RESETCOLOR"
 
-        sudo pacman -Sy --noconfirm tor sudo torsocks bleachbit zenity 
+        sudo pacman -Sy --noconfirm tor torsocks bleachbit zenity 
 
         if [ ! -f /etc/init.d ]; then 
         mkdir /etc/init.d
