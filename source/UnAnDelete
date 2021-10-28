@@ -14,9 +14,11 @@ rm -fv /usr/bin/UnAnonsurf
 rm -fv /etc/init.d/UnAnDelete
 rm -fv /usr/share/pixmaps/anon.png  
 
-if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu) ]] ;
-then
+#удаляем ТОР
+if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu) ]] ; then
     aptitude remove tor -y
+elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then 
+    pacman -Rcs tor
 else
     dnf remove tor -y 
 fi 
