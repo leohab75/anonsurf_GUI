@@ -103,7 +103,7 @@ function start {
 		systemctl start tor
 		sleep 1
 	fi
-	
+
 	if  [ -f /etc/network/iptables.rules ]; then
 		iptables-save > /etc/network/iptables.rules
 		echo -e " $GREEN*$BLUE Saved iptables rules$RESETCOLOR\n"
@@ -176,7 +176,7 @@ function stop {
 		rm /etc/resolv.conf
 		mv /etc/resolv.conf.bak /etc/resolv.conf
 	else
-	  echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 1.1.1.1' > /etc/resolv.conf
+	  echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 9.9.9.9' > /etc/resolv.conf
 	fi
 	
 	
