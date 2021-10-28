@@ -52,7 +52,7 @@ TOR_EXCLUDE="192.168.0.0/16 172.16.0.0/12 10.0.0.0/8"
 
 # The UID Tor runs as
 # change it if, starting tor, the command 'ps -e | grep tor' returns a different UID
-TOR_UID=$(users)
+TOR_UID="tor"
 
 # Tor's TransPort
 TOR_PORT="9040"
@@ -103,6 +103,7 @@ function start {
 		systemctl start tor
 		sleep 1
 	fi
+	
 	if  [ -f /etc/network/iptables.rules ]; then
 		iptables-save > /etc/network/iptables.rules
 		echo -e " $GREEN*$BLUE Saved iptables rules$RESETCOLOR\n"

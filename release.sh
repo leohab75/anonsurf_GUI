@@ -120,6 +120,11 @@ elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then
         mkdir /etc/init.d
         fi   
 
+        if [ ! -f /etc/network/iptables.rules ]; then 
+        mkdir /etc/network
+        touch /etc/network/iptables.rules
+        fi   
+
 
 
 
