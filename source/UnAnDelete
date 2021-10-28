@@ -18,7 +18,7 @@ rm -fv /usr/share/pixmaps/anon.png
 if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu) ]] ; then
     aptitude remove tor -y
 elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then 
-    pacman -Rcs tor
+    pacman -Rcs --noconfirm tor
 else
     dnf remove tor -y 
 fi 
