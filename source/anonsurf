@@ -56,8 +56,8 @@ if [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then
 	TOR_UID="tor"
 else
 	TOR_UID="debian-tor"
+fi
 
-	
 # Tor's TransPort
 TOR_PORT="9040"
 
