@@ -120,6 +120,7 @@ function start {
 	mv /etc/resolv.conf /etc/resolv.conf.bak
 	echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 9.9.9.9' > /etc/resolv.conf
 	echo -e " $GREEN*$BLUE Modified resolv.conf to use Tor and Private Internet Access DNS"
+	resolvconf -u
 	
 	
 
@@ -182,8 +183,8 @@ function stop {
 	else
 	  echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 9.9.9.9' > /etc/resolv.conf
 	fi
-	
-	
+
+	resolvconf -u
 	systemctl stop tor
 	
 	echo -e "\n$GREEN[$BLUE i$GREEN ]$BLUE Reenabling IPv6 services:$RESETCOLOR\n"
