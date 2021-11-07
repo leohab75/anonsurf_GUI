@@ -38,7 +38,6 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
         echo -e "\n $RED -------------"
 
         release="stretch"
-        apt install resolvconf -y
 
     fi
           
@@ -54,7 +53,7 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
      
      
     apt update && apt install deb.torproject.org-keyring -y
-    aptitude install tor bleachbit resolvconf -y
+    aptitude install tor bleachbit -y
     dpkg --configure -a
 
     
@@ -90,13 +89,6 @@ elif [[ -n  $(cat /etc/os-release |  grep -i fedora) ]]; then
         fi   
    
    
-   echo -e "\n$GREEN Чиним DNS => $RED resolvconf\n$RESETCOLOR"
-  
-   wget http://roy.marples.name/downloads/openresolv/openresolv-3.7.0.tar.bz2
-   tar fxjv openresolv-3.7.0.tar.bz2
-   cd openresolv-3.7.0
-   make
-   make install
 
 elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then 
 
@@ -114,7 +106,7 @@ elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then
 
     echo -e "\n$GREEN установка Тор\n$RESETCOLOR"
 
-        sudo pacman -Sy --noconfirm tor torsocks bleachbit zenity  openresolv
+        sudo pacman -Sy --noconfirm tor torsocks bleachbit zenity 
 
         if [ ! -f /etc/init.d ]; then 
         mkdir /etc/init.d

@@ -1,40 +1,13 @@
 #!/bin/bash
 
-### BEGIN INIT INFO
-# Provides:          anonsurf
-# Required-Start:
-# Required-Stop:
-# Should-Start:
-# Default-Start:
-# Default-Stop:
-# Short-Description: Transparent Proxy through TOR.
-### END INIT INFO
-
-# AnonSurf is inspired by the homonimous module of PenMode, developed by the "Pirates' Crew" in
-# order to make it fully compatible with
-# Parrot  OS and other debian-based systems, and it is part of
-# parrot-anon package.
-#
-#
-# Devs:
-# Lorenzo 'EclipseSpark' Faletra <eclipse@frozenbox.org>
-# Lisetta 'Sheireen' Ferrero <sheireen@frozenbox.org>
-# Francesco 'mibofra'/'Eli Aran'/'SimpleSmibs' Bonanno <mibofra@ircforce.tk> <mibofra@frozenbox.org>
-#
-#
-# anonsurf is free software: you can redistribute it and/or
-# modify it under the terms of the GNU General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-# You can get a copy of the license at www.gnu.org/licenses
-#
-# anonsurf is distributed in the hope that it will be
-# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-# General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Parrot Security OS. If not, see <http://www.gnu.org/licenses/>.
+###  COMAND TO /etc/init.d/anonsurf -h
+# /etc/init.d/anonsurf start
+# /etc/init.d/anonsurf stop
+# /etc/init.d/anonsurf restart
+# /etc/init.d/anonsurf ip
+# /etc/init.d/anonsurf change
+# /etc/init.d/anonsurf status
+###
 
 
 export BLUE='\033[1;94m'
@@ -101,7 +74,7 @@ function start {
 	
 	if [ ! -e /var/run/tor/tor.pid ]; then
 		echo -e " $RED*$BLUE Tor is not running! $GREEN starting it $BLUE for you$RESETCOLOR\n" >&2
-		service NetworkManager force-reload > /dev/null 2>&1 || service network-manager force-reload  > /dev/null 2>&1 
+		service NetworkManager force-reload > /dev/null 2>&1 || systemctl force-reload NetworkManager.service  > /dev/null 2>&1 
 		killall dnsmasq > /dev/null 2>&1
 		killall nscd > /dev/null 2>&1	
 		systemctl start tor
@@ -112,15 +85,17 @@ function start {
 		iptables-save > /etc/network/iptables.rules
 		echo -e " $GREEN*$BLUE Saved iptables rules$RESETCOLOR\n"
 	fi
-	
-	iptables -F
-	iptables -t nat -F
-	
+
 	#dns resolv
 	mv /etc/resolv.conf /etc/resolv.conf.bak
 	echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 9.9.9.9' > /etc/resolv.conf
 	echo -e " $GREEN*$BLUE Modified resolv.conf to use Tor and Private Internet Access DNS"
-	resolvconf -u
+	
+	systemctl restart systemd-resolved
+	
+	iptables -F
+	iptables -t nat -F
+	
 	
 	
 
@@ -177,23 +152,23 @@ function stop {
 	fi
 	
 	# restore DNS settings
-	if [ -f /etc/resolv.conf.bak ]; then
+	if [ -e /etc/resolv.conf.bak ]; then
 		rm /etc/resolv.conf
 		mv /etc/resolv.conf.bak /etc/resolv.conf
 	else
 	  echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 9.9.9.9' > /etc/resolv.conf
 	fi
 
-	resolvconf -u
 	systemctl stop tor
-	
+	systemctl restart systemd-resolved
+
 	echo -e "\n$GREEN[$BLUE i$GREEN ]$BLUE Reenabling IPv6 services:$RESETCOLOR\n"
 
 	# reenable IPv6 services
 	sed -i '/^.*\#anonsurf$/d' /etc/sysctl.conf #delete lines containing #anonsurf in /etc/sysctl.conf
 	sysctl -p # have sysctl reread /etc/sysctl.conf
 
-	service NetworkManager force-reload > /dev/null 2>&1 || service network-manager force-reload  > /dev/null 2>&1
+	service NetworkManager force-reload > /dev/null 2>&1 || systemctl force-reload NetworkManager.service > /dev/null 2>&1
 	service nscd start > /dev/null 2>&1
 	service dnsmasq start > /dev/null 2>&1
 	
