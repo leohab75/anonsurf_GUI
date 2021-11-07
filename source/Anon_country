@@ -1,0 +1,258 @@
+#!/bin/bash
+
+rm -rf /tmp/Anon_country
+
+Anon_country_set=$(zenity --list --column="code" --column="Country" \
+            --separator="," --title="EitNodes" --multiple --text="Выберите страны: ctrl+ " \
+"{ac}"  "ASCENSION ISLAND"  \
+"{af}"  "AFGHANISTAN"	\
+"{ax}"  "ALAND"	\
+"{al}"  "ALBANIA"	\
+"{dz}"  "ALGERIA"	\
+"{ad}"  "ANDORRA"	\
+"{ao}"  "ANGOLA"	\
+"{ai}"  "ANGUILLA"	\
+"{aq}"  "ANTARCTICA"	\
+"{ag}"  "ANTIGUA AND BARBUDA"	\
+"{ar}"  "ARGENTINA REPUBLIC"	\
+"{am}"  "ARMENIA"	\
+"{aw}"  "ARUBA"	\
+"{au}"  "AUSTRALIA"	\
+"{at}"  "AUSTRIA"	\
+"{az}"  "AZERBAIJAN"	\
+"{bs}"  "BAHAMAS"	\
+"{bh}"  "BAHRAIN"	\
+"{bd}"  "BANGLADESH"	\
+"{bb}"  "BARBADOS"	\
+"{by}"  "BELARUS"	\
+"{be}"  "BELGIUM"	\
+"{bz}"  "BELIZE"	\
+"{bj}"  "BENIN"	\
+"{bm}"  "BERMUDA"	\
+"{bt}"  "BHUTAN"	\
+"{bo}"  "BOLIVIA"	\
+"{ba}"  "BOSNIA AND HERZEGOVINA"	\
+"{bw}"  "BOTSWANA"	\
+"{bv}"  "BOUVET ISLAND"	\
+"{br}"  "BRAZIL"	\
+"{io}"  "BRITISH INDIAN OCEAN TERR"	\
+"{vg}"  "BRITISH VIRGIN ISLANDS"	\
+"{bn}"  "BRUNEI DARUSSALAM"	\
+"{bg}"  "BULGARIA"	\
+"{bf}"  "BURKINA FASO"	\
+"{bi}"  "BURUNDI"	\
+"{kh}"  "CAMBODIA"	\
+"{cm}"  "CAMEROON"	\
+"{ca}"  "CANADA"	\
+"{cv}"  "CAPE VERDE"	\
+"{ky}"  "CAYMAN ISLANDS"	\
+"{cf}"  "CENTRAL AFRICAN REPUBLIC"	\
+"{td}"  "CHAD"	\
+"{cl}"  "CHILE"	\
+"{cn}"  "PEOPLE’S REPUBLIC OF CHINA"	\
+"{cx}"  "CHRISTMAS ISLANDS"	\
+"{cc}"  "COCOS ISLANDS"	\
+"{co}"  "COLOMBIA"	\
+"{km}"  "COMORAS"	\
+"{cg}"  "CONGO"	\
+"{cd}"  "CONGO (DEMOCRATIC REPUBLIC)"	\
+"{ck}"  "COOK ISLANDS"	\
+"{cr}"  "COSTA RICA"	\
+"{ci}"  "COTE D IVOIRE"	\
+"{hr}"  "CROATIA"	\
+"{cu}"  "CUBA"	\
+"{cy}"  "CYPRUS"	\
+"{cz}"  "CZECH REPUBLIC"	\
+"{dk}"  "DENMARK"	\
+"{dj}"  "DJIBOUTI"	\
+"{dm}"  "DOMINICA"	\
+"{do}"  "DOMINICAN REPUBLIC"	\
+"{tp}"  "EAST TIMOR"	\
+"{ec}"  "ECUADOR"	\
+"{eg}"  "EGYPT"	\
+"{sv}"  "EL SALVADOR"	\
+"{gq}"  "EQUATORIAL GUINEA"	\
+"{ee}"  "ESTONIA"	\
+"{et}"  "ETHIOPIA"	\
+"{fk}"  "FALKLAND ISLANDS"	\
+"{fo}"  "FAROE ISLANDS"	\
+"{fj}"  "FIJI"	\
+"{fi}"  "FINLAND"	\
+"{fr}"  "FRANCE"	\
+"{fx}"  "FRANCE METROPOLITAN"	\
+"{gf}"  "FRENCH GUIANA"	\
+"{pf}"  "FRENCH POLYNESIA"	\
+"{tf}"  "FRENCH SOUTHERN TERRITORIES"	\
+"{ga}"  "GABON"	\
+"{gm}"  "GAMBIA"	\
+"{ge}"  "GEORGIA"	\
+"{de}"  "GERMANY"	\
+"{gh}"  "GHANA"	\
+"{gi}"  "GIBRALTER"	\
+"{gr}"  "GREECE"	\
+"{gl}"  "GREENLAND"	\
+"{gd}"  "GRENADA"	\
+"{gp}"  "GUADELOUPE"	\
+"{gu}"  "GUAM"	\
+"{gt}"  "GUATEMALA"	\
+"{gn}"  "GUINEA"	\
+"{gw}"  "GUINEA-BISSAU"	\
+"{gy}"  "GUYANA"	\
+"{ht}"  "HAITI"	\
+"{hm}"  "HEARD & MCDONALD ISLAND"	\
+"{hn}"  "HONDURAS"	\
+"{hk}"  "HONG KONG"	\
+"{hu}"  "HUNGARY"	\
+"{is}"  "ICELAND"	\
+"{in}"  "INDIA"	\
+"{id}"  "INDONESIA"	\
+"{ir}"  "IRAN, ISLAMIC REPUBLIC OF"	\
+"{iq}"  "IRAQ"	\
+"{ie}"  "IRELAND"	\
+"{im}"  "ISLE OF MAN"	\
+"{il}"  "ISRAEL"	\
+"{it}"  "ITALY"	\
+"{jm}"  "JAMAICA"	\
+"{jp}"  "JAPAN"	\
+"{jo}"  "JORDAN"	\
+"{kz}"  "KAZAKHSTAN"	\
+"{ke}"  "KENYA"	\
+"{ki}"  "KIRIBATI"	\
+"{kp}"  "KOREA, DEM. PEOPLES REP OF"	\
+"{kr}"  "KOREA, REPUBLIC OF"	\
+"{kw}"  "KUWAIT"	\
+"{kg}"  "KYRGYZSTAN"	\
+"{la}"  "LAO PEOPLE’S DEM. REPUBLIC"	\
+"{lv}"  "LATVIA"	\
+"{lb}"  "LEBANON"	\
+"{ls}"  "LESOTHO"	\
+"{lr}"  "LIBERIA"	\
+"{ly}"  "LIBYAN ARAB JAMAHIRIYA"	\
+"{li}"  "LIECHTENSTEIN"	\
+"{lt}"  "LITHUANIA"	\
+"{lu}"  "LUXEMBOURG"	\
+"{mo}"  "MACAO"	\
+"{mk}"  "MACEDONIA"	\
+"{mg}"  "MADAGASCAR"	\
+"{mw}"  "MALAWI"	\
+"{my}"  "MALAYSIA"	\
+"{mv}"  "MALDIVES"	\
+"{ml}"  "MALI"	\
+"{mt}"  "MALTA"	\
+"{mh}"  "MARSHALL ISLANDS"	\
+"{mq}"  "MARTINIQUE"	\
+"{mr}"  "MAURITANIA"	\
+"{mu}"  "MAURITIUS"	\
+"{yt}"  "MAYOTTE"	\
+"{mx}"  "MEXICO"	\
+"{fm}"  "MICRONESIA"	\
+"{md}"  "MOLDAVA REPUBLIC OF"	\
+"{mc}"  "MONACO"	\
+"{mn}"  "MONGOLIA"	\
+"{me}"  "MONTENEGRO"	\
+"{ms}"  "MONTSERRAT"	\
+"{ma}"  "MOROCCO"	\
+"{mz}"  "MOZAMBIQUE"	\
+"{mm}"  "MYANMAR"	\
+"{na}"  "NAMIBIA"	\
+"{nr}"  "NAURU"	\
+"{np}"  "NEPAL"	\
+"{an}"  "NETHERLANDS ANTILLES"	\
+"{nl}"  "NETHERLANDS, THE"	\
+"{nc}"  "NEW CALEDONIA"	\
+"{nz}"  "NEW ZEALAND"	\
+"{ni}"  "NICARAGUA"	\
+"{ne}"  "NIGER"	\
+"{ng}"  "NIGERIA"	\
+"{nu}"  "NIUE"	\
+"{nf}"  "NORFOLK ISLAND"	\
+"{mp}"  "NORTHERN MARIANA ISLANDS"	\
+"{no}"  "NORWAY"	\
+"{om}"  "OMAN"	\
+"{pk}"  "PAKISTAN"	\
+"{pw}"  "PALAU"	\
+"{ps}"  "PALESTINE"	\
+"{pa}"  "PANAMA"	\
+"{pg}"  "PAPUA NEW GUINEA"	\
+"{py}"  "PARAGUAY"	\
+"{pe}"  "PERU"	\
+"{ph}"  "PHILIPPINES (REPUBLIC OF THE)"	\
+"{pn}"  "PITCAIRN"	\
+"{pl}"  "POLAND"	\
+"{pt}"  "PORTUGAL"	\
+"{pr}"  "PUERTO RICO"	\
+"{qa}"  "QATAR"	\
+"{re}"  "REUNION"	\
+"{ro}"  "ROMANIA"	\
+"{ru}"  "RUSSIAN FEDERATION"	\
+"{rw}"  "RWANDA"	\
+"{ws}"  "SAMOA"	\
+"{sm}"  "SAN MARINO"	\
+"{st}"  "SAO TOME/PRINCIPE"	\
+"{sa}"  "SAUDI ARABIA"	\
+"{uk}"  "SCOTLAND"	\
+"{sn}"  "SENEGAL"	\
+"{rs}"  "SERBIA"	\
+"{sc}"  "SEYCHELLES"	\
+"{sl}"  "SIERRA LEONE"	\
+"{sg}"  "SINGAPORE"	\
+"{sk}"  "SLOVAKIA"	\
+"{si}"  "SLOVENIA"	\
+"{sb}"  "SOLOMON ISLANDS"	\
+"{so}"  "SOMALIA"	\
+"{as}"  "SOMOA,GILBERT,ELLICE ISLANDS"	\
+"{za}"  "SOUTH AFRICA"	\
+"{gs}"  "SOUTH GEORGIA, SOUTH SANDWICH ISLANDS"	\
+"{su}"  "SOVIET UNION"	\
+"{es}"  "SPAIN"	\
+"{lk}"  "SRI LANKA"	\
+"{sh}"  "ST. HELENA"	\
+"{kn}"  "ST. KITTS AND NEVIS"	\
+"{lc}"  "ST. LUCIA"	\
+"{pm}"  "ST. PIERRE AND MIQUELON"	\
+"{vc}"  "ST. VINCENT & THE GRENADINES"	\
+"{sd}"  "SUDAN"	\
+"{sr}"  "SURINAME"	\
+"{sj}"  "SVALBARD AND JAN MAYEN"	\
+"{sz}"  "SWAZILAND"	\
+"{se}"  "SWEDEN"	\
+"{ch}"  "SWITZERLAND"	\
+"{sy}"  "SYRIAN ARAB REPUBLIC"	\
+"{tw}"  "TAIWAN"	\
+"{tj}"  "TAJIKISTAN"	\
+"{tz}"  "TANZANIA, UNITED REPUBLIC OF"	\
+"{th}"  "THAILAND"	\
+"{tg}"  "TOGO"	\
+"{tk}"  "TOKELAU"	\
+"{to}"  "TONGA"	\
+"{tt}"  "TRINIDAD AND TOBAGO"	\
+"{tn}"  "TUNISIA"	\
+"{tr}"  "TURKEY"	\
+"{tm}"  "TURKMENISTAN"	\
+"{tc}"  "TURKS AND CALCOS ISLANDS"	\
+"{tv}"  "TUVALU"	\
+"{ug}"  "UGANDA"	\
+"{ua}"  "UKRAINE"	\
+"{ae}"  "UNITED ARAB EMIRATES"	\
+"{gb}"  "UNITED KINGDOM (no new registrations)"	\
+"{uk}"  "UNITED KINGDOM"	\
+"{us}"  "UNITED STATES"	\
+"{um}"  "UNITED STATES MINOR OUTL.IS."	\
+"{uy}"  "URUGUAY"	\
+"{uz}"  "UZBEKISTAN"	\
+"{vu}"  "VANUATU"	\
+"{va}"  "VATICAN CITY STATE"	\
+"{ve}"  "VENEZUELA"	\
+"{vn}"  "VIET NAM"	\
+"{vi}"  "VIRGIN ISLANDS (USA)"	\
+"{wf}"  "WALLIS AND FUTUNA ISLANDS"	\
+"{eh}"  "WESTERN SAHARA"	\
+"{ye}"  "YEMEN"	\
+"{zm}"  "ZAMBIA"	\
+"{zw}"  "ZIMBABWE"	\
+        --height=800 --width=500)
+       
+$Anon_country_set > /tmp/Anon_country
+
+
+exit 0;

@@ -143,6 +143,8 @@ rm -fv /usr/bin/Anon
 rm -fv /usr/bin/UnAnonsurf
 rm -fv /etc/init.d/UnAnDelete
 rm -fv /usr/share/pixmaps/anon.png  
+rm -rf /etc/init.d/Anon_country
+
 
 
 
@@ -157,6 +159,8 @@ cp -v /tmp/anonsurf/UnAnonsurf /usr/bin/
 cp -v /tmp/anonsurf/UnAnDelete /etc/init.d/
 cp -v /tmp/anonsurf/anonsurf /etc/init.d/
 cp -v /tmp/anonsurf/anon.png /usr/share/pixmaps/
+cp -v /tmp/anonsurf/Anon_country /etc/init.d/Anon_country
+
 
       
 
@@ -187,6 +191,8 @@ chmod +x /etc/systemd/system/anonsurf.service
 chmod +x /usr/bin/Anon  
 chmod +x /usr/bin/UnAnonsurf
 chmod +x /etc/init.d/UnAnDelete
+chmod +x /etc/init.d/Anon_country
+
 
 update-desktop-database && update-icon-caches /usr/share/pixmaps/*
 

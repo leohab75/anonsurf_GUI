@@ -176,8 +176,27 @@ function stop {
 }
 
 function change {
+
+	bash /etc/init.d/Anon_country
+
+	if [[ $(cat /tmp/Anon_country) != "" ]]; then
+    
+     sed  -i '/ExitNodes/d' /etc/tor/torrc
+     echo "ExitNodes $(cat /tmp/Anon_country)" >> /etc/tor/torrc
+	
+	else
+
+	echo -e " $GREEN*$RED default(jp/ us/ au/) nodes$RESETCOLOR\n"
+
+     sed  -i '/ExitNodes/d' /etc/tor/torrc
+     echo "ExitNodes {jp}, {us}, {au}" >> /etc/tor/torrc
+	
+	fi
+
 	systemctl reload tor
+	systemctl restart NetworkManager
 	sleep 2
+
 	echo -e " $GREEN*$BLUE Tor daemon reloaded and forced to change nodes$RESETCOLOR\n"
 }
 

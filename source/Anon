@@ -9,9 +9,9 @@ menu=$(zenity --list --text="Функционал"\
         FALSE  "start"\
         FALSE  "stop"\
         FALSE  "restart"\
-        FALSE  "change"\
+        FALSE  "change (test)"\
         True  "status"\
-        --height=300)
+        --height=400 --width=500)
         
 if [ $? = 0 ]; then
  
@@ -22,9 +22,12 @@ if [ $? = 0 ]; then
                     Статус сети Тор \n\
                     $active "\
                     --height=200 --width=200
-    else
+    elif [ $menu = "change" ]; then
+        bash /etc/init.d/Anon_country
+        pkexec bash /etc/init.d/anonsurf change
 
-            pkexec bash /etc/init.d/anonsurf $menu
+    else
+        pkexec bash /etc/init.d/anonsurf $menu        
     fi
 
 else break ;
