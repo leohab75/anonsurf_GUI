@@ -9,7 +9,7 @@ menu=$(zenity --list --text="Функционал"\
         FALSE  "start"\
         FALSE  "stop"\
         FALSE  "restart"\
-        FALSE  "change (test)"\
+        FALSE  "change"\
         True  "status"\
         --height=400 --width=500)
         

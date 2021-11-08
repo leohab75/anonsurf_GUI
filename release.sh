@@ -78,7 +78,6 @@ elif [[ -n  $(cat /etc/os-release |  grep -i fedora) ]]; then
 
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
     dnf check-update
-    dnf install epel-release -y
     dnf install tor bleachbit zenity -y
    
      
@@ -187,7 +186,6 @@ systemctl enable --now tor.service
 chmod +x /etc/init.d/anonsurf
 chmod +x /usr/share/applications/anonsurf.desktop
 chmod +x /usr/share/applications/Uninstall-Anonsurf.desktop 
-chmod +x /etc/systemd/system/anonsurf.service
 chmod +x /usr/bin/Anon  
 chmod +x /usr/bin/UnAnonsurf
 chmod +x /etc/init.d/UnAnDelete
