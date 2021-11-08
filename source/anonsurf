@@ -73,8 +73,8 @@ function start {
 	echo -e "\n$GREEN[$BLUE i$GREEN ]$BLUE Starting anonymous mode:$RESETCOLOR\n"
 	
 	if [ ! -e /var/run/tor/tor.pid ]; then
-		echo -e " $RED*$BLUE Tor is not running! $GREEN starting it $BLUE for you$RESETCOLOR\n" >&2
-		service NetworkManager force-reload > /dev/null 2>&1 || systemctl force-reload NetworkManager.service  > /dev/null 2>&1 
+		echo -e " $RED*$BLUE Tor  $GREEN starting it $BLUE for you$RESETCOLOR\n" >&2
+		service NetworkManager force-reload > /dev/null 2>&1 || systemctl restart NetworkManager.service  > /dev/null 2>&1 
 		killall dnsmasq > /dev/null 2>&1
 		killall nscd > /dev/null 2>&1	
 		systemctl start tor
@@ -168,7 +168,7 @@ function stop {
 	sed -i '/^.*\#anonsurf$/d' /etc/sysctl.conf #delete lines containing #anonsurf in /etc/sysctl.conf
 	sysctl -p # have sysctl reread /etc/sysctl.conf
 
-	service NetworkManager force-reload > /dev/null 2>&1 || systemctl force-reload NetworkManager.service > /dev/null 2>&1
+	service NetworkManager force-reload > /dev/null 2>&1 || systemctl restart NetworkManager.service > /dev/null 2>&1
 	service nscd start > /dev/null 2>&1
 	service dnsmasq start > /dev/null 2>&1
 	
@@ -181,15 +181,17 @@ function change {
 
 	if [[ $(cat /tmp/Anon_country) != "" ]]; then
     
-     sed  -i '/ExitNodes/d' /etc/tor/torrc
-     echo "ExitNodes $(cat /tmp/Anon_country)" >> /etc/tor/torrc
+	echo -e " $GREEN*$BLUE ExitNodes $(cat /tmp/Anon_country)$RESETCOLOR\n"
+
+    sed  -i '/ExitNodes/d' /etc/tor/torrc
+    echo "ExitNodes $(cat /tmp/Anon_country)" >> /etc/tor/torrc
 	
 	else
 
-	echo -e " $GREEN*$RED default(jp/ us/ au/) nodes$RESETCOLOR\n"
+	echo -e " $GREEN*$RED default Exitnodes{jp}, {us}, {au}$RESETCOLOR\n"
 
-     sed  -i '/ExitNodes/d' /etc/tor/torrc
-     echo "ExitNodes {jp}, {us}, {au}" >> /etc/tor/torrc
+    sed  -i '/ExitNodes/d' /etc/tor/torrc
+    echo "ExitNodes {jp}, {us}, {au}" >> /etc/tor/torrc
 	
 	fi
 

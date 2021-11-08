@@ -1,9 +1,7 @@
 #!/bin/bash
 
-rm -rf /tmp/Anon_country
-
-Anon_country_set=$(zenity --list --checklist  --column="check" --column="Code" --column="Country"\
-            --separator="," --title="ExitNodes" --multiple --text="Выберите страны до (10 по докам)"\
+Anon_country_set=$(zenity --list --checklist  --column="check" --column="Code" --column="Country" \
+            --separator="," --title="ExitNodes" --multiple --text="Выберите страны до" \
 false "{ac}"  "ASCENSION ISLAND"  \
 false "{af}"  "AFGHANISTAN"	\
 false "{ax}"  "ALAND"	\

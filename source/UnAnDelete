@@ -13,6 +13,7 @@ rm -fv /usr/bin/Anon
 rm -fv /usr/bin/UnAnonsurf
 rm -fv /etc/init.d/UnAnDelete
 rm -fv /usr/share/pixmaps/anon.png  
+rm -fv /etc/init.d/Anon_country
 
 #удаляем ТОР
 if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu) ]] ; then
