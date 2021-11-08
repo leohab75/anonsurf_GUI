@@ -189,7 +189,8 @@ chmod +x /usr/share/applications/Uninstall-Anonsurf.desktop
 chmod +x /usr/bin/Anon  
 chmod +x /usr/bin/UnAnonsurf
 chmod +x /etc/init.d/UnAnDelete
-chmod 755 /etc/init.d/Anon_country
+chmod +x /etc/init.d/Anon_country
+chmod 777 /tmp/Anon_country
 
 
 update-desktop-database && update-icon-caches /usr/share/pixmaps/*
