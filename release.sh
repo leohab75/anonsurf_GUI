@@ -190,8 +190,6 @@ chmod +x /usr/bin/Anon
 chmod +x /usr/bin/UnAnonsurf
 chmod +x /etc/init.d/UnAnDelete
 chmod +x /etc/init.d/Anon_country
-chmod 777 /tmp/Anon_country
-
 
 update-desktop-database && update-icon-caches /usr/share/pixmaps/*
 

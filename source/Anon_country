@@ -102,16 +102,16 @@ false "{hn}"  "HONDURAS"	\
 false "{hk}"  "HONG KONG"	\
 false "{hu}"  "HUNGARY"	\
 false "{is}"  "ICELAND"	\
-true "{in}"  "INDIA"	\
+false "{in}"  "INDIA"	\
 false "{id}"  "INDONESIA"	\
 false "{ir}"  "IRAN, ISLAMIC REPUBLIC OF"	\
 false "{iq}"  "IRAQ"	\
 false "{ie}"  "IRELAND"	\
 false "{im}"  "ISLE OF MAN"	\
 false "{il}"  "ISRAEL"	\
-true "{it}"  "ITALY"	\
+false "{it}"  "ITALY"	\
 false "{jm}"  "JAMAICA"	\
-true "{jp}"  "JAPAN"	\
+false "{jp}"  "JAPAN"	\
 false "{jo}"  "JORDAN"	\
 false "{kz}"  "KAZAKHSTAN"	\
 false "{ke}"  "KENYA"	\
@@ -249,8 +249,9 @@ false "{ye}"  "YEMEN"	\
 false "{zm}"  "ZAMBIA"	\
 false "{zw}"  "ZIMBABWE"	\
         --height=800 --width=500)
-       
-$Anon_country_set > /tmp/Anon_country
+
+touch /tmp/Anon_country     
+echo $Anon_country_set > /tmp/Anon_country 
 
 
 exit 0;

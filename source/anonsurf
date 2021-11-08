@@ -199,6 +199,8 @@ function change {
 	systemctl restart NetworkManager
 	sleep 2
 
+	rm -f /tmp/Anon_country
+
 	echo -e " $GREEN*$BLUE Tor daemon reloaded and forced to change nodes$RESETCOLOR\n"
 }
 

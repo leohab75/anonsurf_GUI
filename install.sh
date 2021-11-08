@@ -14,7 +14,6 @@ mkdir /tmp/anonsurf
 echo -e "\n$GREEN*$BLUE миграция во временный каталог \n$RESETCOLOR"
 
 cp -rv  $(pwd)/source/*  /tmp/anonsurf/
-touch /tmp/Anon_country
 
 # Добавляем репозитории и
 # устанавливаем Тор
