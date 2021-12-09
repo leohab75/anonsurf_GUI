@@ -45,15 +45,14 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
 
     apt install apt-transport-https wget zenity aptitude -y
     rm -fv /etc/apt/sources.list.d/tor.list
-    echo "deb [arch=amd64] https://deb.torproject.org/torproject.org tor-nightly-master-$release main" > /etc/apt/sources.list.d/tor.list
+    echo "deb [arch=amd64] https://deb.torproject.org/torproject.org $release main" > /etc/apt/sources.list.d/tor.list
      
      
      wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
      gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
      
      
-    apt update && apt install deb.torproject.org-keyring -y
-    aptitude install tor bleachbit -y
+    apt update && aptitude install tor bleachbit -y
     dpkg --configure -a
 
     
