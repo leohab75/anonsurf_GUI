@@ -1,5 +1,5 @@
 # anonsurf_GUI
-GUI for Anonsurf
+GUI for Anonsurf 2.0
 
 Простая и интуинтивно понятная утилита для анонимного сёрфига интернетов..
 
@@ -31,9 +31,9 @@ UnAnonsurf  //для удаления программы
 
 управление утилитой из терминала распологается в 
 
-/etc/init.d/anonsurf --help
+sudo /usr/lib/anonsurf/anondaemon start|stop|restart
 
-
+часть кода перенесена с Parrot Os (Anonsurf 3.0)
 
 
 

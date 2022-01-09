@@ -20,6 +20,10 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
         
         
         release=$(lsb_release -c | awk '{print $ 2}')
+        
+        #Добавление ключей cloudfare "facal"
+        echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/ focal main' | sudo tee /etc/apt/sources.list.d/cloudflare-main.list
+        curl https://pkg.cloudflare.com/cloudflare-main.gpg -o /usr/share/keyrings/cloudflare-main.gpg
 
     elif [[ -n  $(cat /etc/os-release |  grep -i ubuntu) ]]; then
 
@@ -37,22 +41,20 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
         echo -e "\n $GREEN debian based: по умолчанию  'stretch'  "
         echo -e "\n $RED -------------"
 
-        release="stretch"
+        release="buster"
 
     fi
           
             echo -e "\n$GREEN Добавление репозитория и установка Тор\n$RESETCOLOR"
 
-    apt install apt-transport-https wget zenity aptitude -y
-    rm -fv /etc/apt/sources.list.d/tor.list
-    echo "deb [arch=amd64] https://deb.torproject.org/torproject.org $release main" > /etc/apt/sources.list.d/tor.list
-     
-     
-     wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
-     gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
-     
-     
-    apt update && aptitude install tor bleachbit -y
+    apt update && apt install tor bleachbit zenity obfs4proxy libc6 nyx wget -y
+    apt install libnotify-bin onioncircuits connect-proxy onionshare torsocks tor-geoipdb -y
+    
+    #cloudfare daemon
+    wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+    dpkg -i cloudflared-linux-amd64.deb
+    rm cloudflared-linux-amd64.deb
+    
     dpkg --configure -a
 
     
@@ -77,7 +79,14 @@ elif [[ -n  $(cat /etc/os-release |  grep -i fedora) ]]; then
 
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
     dnf check-update
-    dnf install tor bleachbit zenity -y
+    dnf install tor bleachbit zenity obfs4proxy obfs4proxy libc6 nyx wget -y
+    dnf install libnotify-bin onioncircuits connect-proxy onionshare torsocks tor-geoipdb -y
+    
+    #cloudfare
+    
+    wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm
+    rpm install cloudflared-linux-x86_64.rpm
+    rm cloudflared-linux-x86_64.rpm
    
      
    
@@ -104,8 +113,16 @@ elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then
 
     echo -e "\n$GREEN установка Тор\n$RESETCOLOR"
 
-        sudo pacman -Sy --noconfirm tor torsocks bleachbit zenity 
+        sudo pacman -Sy --noconfirm tor torsocks bleachbit zenity  obfs4proxy libc6 nyx wget
+        sudo pacman -Sy --noconfirm libnotify-bin onioncircuits connect-proxy onionshare torsocks tor-geoipdb 
 
+        #cloudfare
+        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+        mv cloudflared-linux-amd64 cloudflared
+        mv cloudflared /usr/local/bin/cloudflared
+        chmod +x /usr/local/bin/cloudflared
+        
+        
         if [ ! -f /etc/init.d ]; then 
         mkdir /etc/init.d
         fi   
@@ -142,23 +159,36 @@ rm -fv /usr/bin/UnAnonsurf
 rm -fv /etc/init.d/UnAnDelete
 rm -fv /usr/share/pixmaps/anon.png  
 rm -rf /etc/init.d/Anon_country
+rm -rf /usr/lib/anonsurf
+rm -rf /usr/bin/dnstool
+rm -rf /etc/anonsurf
 
 
 
+mkdir /usr/lib/anonsurf/
+mkdir /etc/anonsurf/
 
 echo -e "\n$GREEN*$BLUE копирование в рабочие каталоги \n$RESETCOLOR"
-cp -v /tmp/anonsurf/anonsurf.desktop /usr/share/applications/
-cp -v /tmp/anonsurf/Uninstall-Anonsurf.desktop /usr/share/applications/
-cp -v /tmp/anonsurf/torrc.anon /etc/tor/
-cp -v /tmp/anonsurf/onion.pac /etc/tor/
-cp -v /tmp/anonsurf/anonsurf.service /etc/systemd/system/
-cp -v /tmp/anonsurf/Anon /usr/bin/
-cp -v /tmp/anonsurf/UnAnonsurf /usr/bin/
-cp -v /tmp/anonsurf/UnAnDelete /etc/init.d/
-cp -v /tmp/anonsurf/anonsurf /etc/init.d/
-cp -v /tmp/anonsurf/anon.png /usr/share/pixmaps/
-cp -v /tmp/anonsurf/Anon_country /etc/init.d/Anon_country
+cp -v /tmp/Anonsurf_Gui/source/anonsurf.desktop /usr/share/applications/
+cp -v /tmp/Anonsurf_Gui/source/Uninstall-Anonsurf.desktop /usr/share/applications/
+cp -v /tmp/Anonsurf_Gui/source/torrc.anon /etc/tor/
+cp -v /tmp/Anonsurf_Gui/source/Anon /usr/bin/
+cp -v /tmp/Anonsurf_Gui/source/UnAnonsurf /usr/bin/
+cp -v /tmp/Anonsurf_Gui/source/UnAnDelete /etc/init.d/
+cp -v /tmp/Anonsurf_Gui/source/anondaemon /usr/lib/anonsurf/
+cp -v /tmp/Anonsurf_Gui/source/anon.png /usr/share/pixmaps/
+cp -v /tmp/Anonsurf_Gui/source/Anon_country /etc/init.d/
+cp -v /tmp/Anonsurf_Gui/source/anonsurfd.service /lib/systemd/system/
+cp -v /tmp/Anonsurf_Gui/source/cloudflared-proxy-dns.service /lib/systemd/system/
 
+cp -v /tmp/Anonsurf_Gui/bin/make-torrc /usr/lib/anonsurf/
+cp -v /tmp/Anonsurf_Gui/bin/dnstool /usr/bin/
+
+cp -v /tmp/Anonsurf_Gui/configs/onion.pac /etc/anonsurf/
+cp -v /tmp/Anonsurf_Gui/configs/torrc.base /etc/anonsurf/
+cp -v /tmp/Anonsurf_Gui/configs/bridges.txt /etc/anonsurf/
+cp -v /tmp/Anonsurf_Gui/configs/anonrc /etc/anonsurf/
+cp -v /tmp/Anonsurf_Gui/configs/bridgerc.base /etc/anonsurf
 
       
 
@@ -166,14 +196,12 @@ cp -v /tmp/anonsurf/Anon_country /etc/init.d/Anon_country
 if [ -f /etc/tor/torrc ]; then
  mv -v /etc/tor/torrc /etc/tor/torrc.orig
 fi
-if [ -f /etc/tor/torrc.anon ]; then
- mv -v /etc/tor/torrc.anon /etc/tor/torrc
-fi
+
 
 
 if [ -f /lib/systemd/system/tor.service ]; then
  rm -fv /lib/systemd/system/tor.service
- mv -v /tmp/anonsurf/tor.service /lib/systemd/system/tor.service
+ mv -v /tmp/Anonsurf_Gui/source/tor.service /lib/systemd/system/tor.service
 fi 
 
 
@@ -182,13 +210,18 @@ echo -e "\n$GREEN включение сервиса Тор\n$RESETCOLOR"
 tor -f /etc/tor/torrc
 systemctl enable --now tor.service
 
-chmod +x /etc/init.d/anonsurf
+echo -e "\n$GREEN включение сервиса cloudfare\n$RESETCOLOR"
+systemctl enable --now cloudflared-proxy-dns.service
+
+
+chmod +x /usr/lib/anonsurf/anondaemon
 chmod +x /usr/share/applications/anonsurf.desktop
 chmod +x /usr/share/applications/Uninstall-Anonsurf.desktop 
 chmod +x /usr/bin/Anon  
 chmod +x /usr/bin/UnAnonsurf
 chmod +x /etc/init.d/UnAnDelete
 chmod +x /etc/init.d/Anon_country
+chmod +x /usr/bin/dnstool
 
 update-desktop-database && update-icon-caches /usr/share/pixmaps/*
 

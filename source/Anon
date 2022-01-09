@@ -24,10 +24,10 @@ if [ $? = 0 ]; then
                     --height=200 --width=200
     elif [ $menu = "change" ]; then
         bash /etc/init.d/Anon_country
-        pkexec bash /etc/init.d/anonsurf change
+        pkexec bash /usr/lib/anonsurf/anondaemon change
 
     else
-        pkexec bash /etc/init.d/anonsurf $menu        
+        pkexec bash /usr/lib/anonsurf/anondaemon $menu        
     fi
 
 else break ;

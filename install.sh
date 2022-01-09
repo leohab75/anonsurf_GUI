@@ -10,14 +10,14 @@ rm -rfv /tmp/anonsurf
 fi
 
 
-mkdir /tmp/anonsurf
 echo -e "\n$GREEN*$BLUE миграция во временный каталог \n$RESETCOLOR"
 
-cp -rv  $(pwd)/source/*  /tmp/anonsurf/
+cd ../
+cp -rv Anonsurf_Gui /tmp/
 
 # Добавляем репозитории и
 # устанавливаем Тор
-pkexec bash $(pwd)/release.sh 
+pkexec bash /tmp/Anonsurf_Gui/release.sh 
 
 
 
@@ -31,7 +31,7 @@ ln -s  /usr/share/applications/anonsurf.desktop   /home/$USER/'Рабочий с
 fi 
 
 echo -e "\n$GREEN*$BLUE Удаляется временный каталог \n$RESETCOLOR"
-rm -rfv /tmp/anonsurf
+rm -rfv /tmp/Anonsurf_Gui
 
 
 exit 0;

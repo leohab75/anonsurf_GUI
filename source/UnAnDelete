@@ -2,7 +2,7 @@
 rm -fv /home/$USER/'Рабочий стол'/Anonsurf
 
 $RED
-rm -fv /etc/init.d/anonsurf
+rm -fv /usr/lib/anonsurf/anondaemon
 rm -fv /usr/share/applications/anonsurf.desktop
 rm -fv /usr/share/applications/Uninstall-Anonsurf.desktop
 rm -fv /etc/tor/torrc 
@@ -14,14 +14,19 @@ rm -fv /usr/bin/UnAnonsurf
 rm -fv /etc/init.d/UnAnDelete
 rm -fv /usr/share/pixmaps/anon.png  
 rm -fv /etc/init.d/Anon_country
+rm -rf /usr/lib/anonsurf/make-torrc
+rm -rf /usr/bin/dnstool
+rm -rf /lib/systemd/system/anonsurfd.service
+rm -rf /etc/systemd/system/cloudflared-proxy-dns.service
+rm -rf /usr/local/bin/cloudflared
 
 #удаляем ТОР
-if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu) ]] ; then
-    aptitude remove tor -y
-elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then 
-    pacman -Rcs --noconfirm tor
-else
-    dnf remove tor -y 
-fi 
+# if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu) ]] ; then
+#     aptitude remove tor -y
+# elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then 
+#     pacman -Rcs --noconfirm tor
+# else
+#     dnf remove tor -y 
+# fi 
 
-exit 0;
+# exit 0;

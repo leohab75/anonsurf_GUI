@@ -13,7 +13,7 @@ SocksPort 127.0.0.1:9050 IsolateClientAddr IsolateSOCKSAuth IsolateClientProtoco
 ControlPort 127.0.0.1:9051
 
 #use tor to resolve domain names
-DNSPort 127.0.0.1:53
+DNSPort 127.0.0.1:9053
 
 #daemonize
 RunAsDaemon 1
