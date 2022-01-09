@@ -50,10 +50,6 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
     apt update && apt install tor bleachbit zenity obfs4proxy libc6 nyx wget -y
     apt install libnotify-bin onioncircuits connect-proxy onionshare torsocks tor-geoipdb -y
     
-    #cloudfare daemon
-    wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
-    dpkg -i cloudflared-linux-amd64.deb
-    rm cloudflared-linux-amd64.deb
     
     dpkg --configure -a
 
@@ -81,15 +77,7 @@ elif [[ -n  $(cat /etc/os-release |  grep -i fedora) ]]; then
     dnf check-update
     dnf install tor bleachbit zenity obfs4proxy obfs4proxy libc6 nyx wget -y
     dnf install libnotify-bin onioncircuits connect-proxy onionshare torsocks tor-geoipdb -y
-    
-    #cloudfare
-    
-    wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm
-    rpm install cloudflared-linux-x86_64.rpm
-    rm cloudflared-linux-x86_64.rpm
-   
      
-   
         if [ ! -f /etc/network/iptables.rules ]; then 
         mkdir /etc/network
         touch /etc/network/iptables.rules
@@ -116,11 +104,7 @@ elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then
         sudo pacman -Sy --noconfirm tor torsocks bleachbit zenity  obfs4proxy libc6 nyx wget
         sudo pacman -Sy --noconfirm libnotify-bin onioncircuits connect-proxy onionshare torsocks tor-geoipdb 
 
-        #cloudfare
-        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
-        mv cloudflared-linux-amd64 cloudflared
-        mv cloudflared /usr/local/bin/cloudflared
-        chmod +x /usr/local/bin/cloudflared
+        
         
         
         if [ ! -f /etc/init.d ]; then 
@@ -205,13 +189,21 @@ if [ -f /lib/systemd/system/tor.service ]; then
 fi 
 
 
-echo -e "\n$GREEN включение сервиса Тор\n$RESETCOLOR"
+echo -e "\n$GREEN включение сервиса cloudflare\n$RESETCOLOR"
+if [ ! -f /usr/local/bin/cloudflared ]; then
+        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+        mv cloudflared-linux-amd64 cloudflared
+        mv cloudflared /usr/local/bin/cloudflared
+        chmod +x /usr/local/bin/cloudflared
+fi
 
+systemctl enable --now cloudflared-proxy-dns.service
+
+
+echo -e "\n$GREEN включение сервиса Тор\n$RESETCOLOR"
 tor -f /etc/tor/torrc
 systemctl enable --now tor.service
 
-echo -e "\n$GREEN включение сервиса cloudfare\n$RESETCOLOR"
-systemctl enable --now cloudflared-proxy-dns.service
 
 
 chmod +x /usr/lib/anonsurf/anondaemon

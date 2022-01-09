@@ -20,13 +20,5 @@ rm -rf /lib/systemd/system/anonsurfd.service
 rm -rf /etc/systemd/system/cloudflared-proxy-dns.service
 rm -rf /usr/local/bin/cloudflared
 
-#удаляем ТОР
-# if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  grep -i ubuntu) ]] ; then
-#     aptitude remove tor -y
-# elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then 
-#     pacman -Rcs --noconfirm tor
-# else
-#     dnf remove tor -y 
-# fi 
 
-# exit 0;
+exit 0;
