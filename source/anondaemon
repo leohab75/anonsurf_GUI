@@ -54,7 +54,7 @@ else
 fi
 
 # Tor's TransPort
- TOR_PORT="9040"
+ #TOR_PORT="9040"
 
 
 function disableService {
@@ -101,9 +101,7 @@ function startSurf {
 		echo -e "[$GREEN*${RESETCOLOR}]$BLUE Saved iptables rules${RESETCOLOR}"
 	fi
 	
-	#cloudfare resolve
-	systemctl start cloudflared-proxy-dns.service
-
+	
 	# Making IPTables rules
 	/usr/sbin/iptables -F
 	/usr/sbin/iptables -t nat -F
@@ -114,7 +112,7 @@ function startSurf {
 
 	#set dns redirect
 	echo -e " $GREEN+$BLUE Redirecting DNS traffic through tor${RESETCOLOR}"
-	#/usr/sbin/iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports $DNS_PORT
+	/usr/sbin/iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports $DNS_PORT
 
 	/usr/sbin/iptables -t nat -A OUTPUT -p TCP --dport 53 -j DNAT --to-destination 127.0.0.1:9053
     /usr/sbin/iptables -t nat -A OUTPUT -p UDP --dport 53 -j DNAT --to-destination 127.0.0.1:9053
@@ -206,10 +204,7 @@ function stopSurf {
 	fi
 	echo -e -n "$GREEN*$BLUE Restore DNS service\n$RESETCOLOR"
 	
-	#cloudfare resolve
-	systemctl stop cloudflared-proxy-dns.service
-
-	
+		
 	# Restore DNS settings
 	/usr/bin/dnstool address dhcp
 
