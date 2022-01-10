@@ -3,7 +3,7 @@ GUI for Anonsurf 2.0
 
 Простая и интуинтивно понятная утилита для анонимного сёрфига интернетов..
 
-На данном этапе поддерживаются: Debian, Ubuntu, Fedora, RHEL, Arch и их производные.
+На данном этапе поддерживаются: Debian, Ubuntu, (Fedora, RHEL, Arch) и их производные.
 
 Установка:  sudo apt install git или sudo yum install git
 
