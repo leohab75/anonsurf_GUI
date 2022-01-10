@@ -95,7 +95,9 @@ function startSurf {
 	DNS_PORT=`cat /etc/tor/torrc | grep DNSPort | cut -d " " -f 2 | cut -d ":" -f 2`
 	# Init DNS
 	echo -e "[$GREEN*${RESETCOLOR}]$BLUE Modified resolv.conf to use Tor${RESETCOLOR}"
-	/usr/bin/dnstool address 127.0.0.1
+	#/usr/bin/dnstool address 127.0.0.1
+	rm -f /etc/resolv.conf
+	echo nameserver 127.0.0.1 |  tee /etc/resolv.conf >/dev/null
 
 	# disable ipv6
 	echo -e "[$GREEN*${RESETCOLOR}]$BLUE Disabling IPv6 for security reasons${RESETCOLOR}"
