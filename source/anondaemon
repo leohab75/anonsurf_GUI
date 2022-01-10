@@ -54,7 +54,7 @@ else
 fi
 
 # Tor's TransPort
- #TOR_PORT="9040"
+ TOR_PORT="9040"
 
 
 function disableService {
@@ -65,10 +65,13 @@ function disableService {
 		/usr/sbin/service resolvconf stop 2>/dev/null || echo " (already stopped)"
 		echo -e -n "\n $GREEN*$BLUE Stopping service dnsmasq$RESETCOLOR${RESETCOLOR}"
 		/usr/sbin/service dnsmasq stop 2>/dev/null || echo " (already stopped)"
-		killall dnsmasq nscd resolvconf 2>/dev/null || true
+		killall dnsmasq nscd resolvconf cloudflared 2>/dev/null || true
 		# sleep 1
 		killall -9 dnsmasq 2>/dev/null || true
-	fi
+		echo -e -n "\n $GREEN*$BLUE Stopping service systemd-resolved $RESETCOLOR${RESETCOLOR}"
+		systemctl stop systemd-resolved.service
+
+		fi
 }
 
 
@@ -77,8 +80,9 @@ function enableService {
 	/usr/sbin/service resolvconf start || service resolvconf restart || true
 	/usr/sbin/service dnsmasq start || true
 	/usr/sbin/service nscd start || true
+	/usr/local/bin/cloudflared proxy-dns &
 	echo -e " $GREEN*$BLUE It is safe to not worry for dnsmasq and nscd start errors if they are not installed.$RESETCOLOR"
-	# sleep 1
+	sleep 2
 }
 
 
@@ -112,10 +116,10 @@ function startSurf {
 
 	#set dns redirect
 	echo -e " $GREEN+$BLUE Redirecting DNS traffic through tor${RESETCOLOR}"
-	/usr/sbin/iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports $DNS_PORT
+	/usr/sbin/iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports 9053
 
-	/usr/sbin/iptables -t nat -A OUTPUT -p TCP --dport 53 -j DNAT --to-destination 127.0.0.1:9053
-    /usr/sbin/iptables -t nat -A OUTPUT -p UDP --dport 53 -j DNAT --to-destination 127.0.0.1:9053
+	# /usr/sbin/iptables -t nat -A OUTPUT -p TCP --dport 53 -j DNAT --to-destination 127.0.0.1:9053
+    # /usr/sbin/iptables -t nat -A OUTPUT -p UDP --dport 53 -j DNAT --to-destination 127.0.0.1:9053
 	
 	#resolve .onion domains mapping 10.192.0.0/10 address space
 	/usr/sbin/iptables -t nat -A OUTPUT -p tcp -d 10.192.0.0/10 -j REDIRECT --to-ports $TOR_PORT
@@ -207,15 +211,29 @@ function stopSurf {
 		
 	# Restore DNS settings
 	/usr/bin/dnstool address dhcp
-
+	sleep 1
+	
 	if [ `systemctl is-active tor` == "active" ]
 	then
-		/usr/sbin/service tor stop
+		systemctl stop tor
 	fi
 	# sleep 1
 	killall tor
 }
 
+
+function changeNodes {
+
+sed '/ExitNodes\|EntryNodes/d' /etc/tor/torrc > /dev/null
+
+echo -e -n "$GREEN*$BLUE change Exit/EntryNodes $(cat /tmp/Anon_country) \n$RESETCOLOR"
+echo -e "ExitNodes $(cat /tmp/Anon_country) StrictNodes 1" >> /etc/tor/torrc
+echo -e "EntryNodes $(cat /tmp/Anon_country) StrictNodes 1" >> /etc/tor/torrc
+
+rm /tmp/Anon_country
+
+systemctl reload tor
+}
 
 case "$1" in
 	start)
@@ -225,7 +243,7 @@ case "$1" in
 			startSurf
 			if [ `systemctl is-active tor` != "active" ]
 			then
-				/usr/sbin/service tor start || echo -e "  [x] Can not start Tor service!"
+				systemctl start tor || echo -e "  [x] Can not start Tor service!"
 			fi
 		else
 			echo -e "  [x] torrc not found. Can not start!"
@@ -241,5 +259,15 @@ case "$1" in
 		# sleep 1
 		$0 startSurf
 	;;
+	change)
+        if [[ $(cat /tmp/Anon_country) != "" ]]; then
+            changeNodes
+        else 
+            sed '/ExitNodes\|EntryNodes/d' /etc/tor/torrc > /dev/null
+            rm /tmp/Anon_country
+            echo -e "[x] not set country"
+        fi
+	;;
+	
 	*)
 	esac

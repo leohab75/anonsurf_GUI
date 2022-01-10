@@ -36,8 +36,8 @@ fi
 done
 
 #сообщение статуса сети Тор
-notifi=$(systemctl status tor | grep -i Active)
-zenity --notification  --text="$notifi"
+notifi=$(systemctl is-active tor)
+zenity --notification  --text="$notifi Tor"
 
         
 

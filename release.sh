@@ -22,8 +22,8 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
         release=$(lsb_release -c | awk '{print $ 2}')
         
         #Добавление ключей cloudfare "facal"
-        echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/ focal main' | sudo tee /etc/apt/sources.list.d/cloudflare-main.list
-        curl https://pkg.cloudflare.com/cloudflare-main.gpg -o /usr/share/keyrings/cloudflare-main.gpg
+        # echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/ focal main' | sudo tee /etc/apt/sources.list.d/cloudflare-main.list
+        # curl https://pkg.cloudflare.com/cloudflare-main.gpg -o /usr/share/keyrings/cloudflare-main.gpg
 
     elif [[ -n  $(cat /etc/os-release |  grep -i ubuntu) ]]; then
 
@@ -48,7 +48,7 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
             echo -e "\n$GREEN Добавление репозитория и установка Тор\n$RESETCOLOR"
 
     apt update && apt install tor bleachbit zenity obfs4proxy libc6 nyx wget -y
-    apt install libnotify-bin onioncircuits connect-proxy onionshare torsocks tor-geoipdb -y
+    apt install libnotify-bin  connect-proxy  torsocks tor-geoipdb -y
     
     
     dpkg --configure -a
