@@ -54,22 +54,22 @@ else
 fi
 
 # Tor's TransPort
- TOR_PORT="9040"
+ #TOR_PORT="9040"
 
 
 function disableService {
 	if [ ! -e /tmp/tor.pid ]; then
 		echo -e -n "\n $GREEN*$BLUE Stopping service nscd${RESETCOLOR}"
-		/usr/sbin/service nscd stop 2>/dev/null || echo " (already stopped)"
+		systemctl stop nscd  2>/dev/null || echo " (already stopped)"
 		echo -e -n "\n $GREEN*$BLUE Stopping service resolvconf"
-		/usr/sbin/service resolvconf stop 2>/dev/null || echo " (already stopped)"
+		systemctl stop resolvconf 2>/dev/null || echo " (already stopped)"
 		echo -e -n "\n $GREEN*$BLUE Stopping service dnsmasq$RESETCOLOR${RESETCOLOR}"
-		/usr/sbin/service dnsmasq stop 2>/dev/null || echo " (already stopped)"
+		systemctl stop dnsmasq  2>/dev/null || echo " (already stopped)"
 		killall dnsmasq nscd resolvconf cloudflared 2>/dev/null || true
 		# sleep 1
 		killall -9 dnsmasq 2>/dev/null || true
 		echo -e -n "\n $GREEN*$BLUE Stopping service systemd-resolved $RESETCOLOR${RESETCOLOR}"
-		systemctl stop systemd-resolved.service
+		systemctl stop systemd-resolved
 
 		fi
 }
@@ -77,12 +77,14 @@ function disableService {
 
 function enableService {
 	echo -e -n " $GREEN*$BLUE Restarting services\n"
-	/usr/sbin/service resolvconf start || service resolvconf restart || true
-	/usr/sbin/service dnsmasq start || true
-	/usr/sbin/service nscd start || true
+	systemctl start resolvconf || systemctl restart resolvconf || true
+	systemctl start dnsmasq  || true
+	systemctl start nscd || true
 	/usr/local/bin/cloudflared proxy-dns &
 	echo -e " $GREEN*$BLUE It is safe to not worry for dnsmasq and nscd start errors if they are not installed.$RESETCOLOR"
 	sleep 2
+	echo -e -n "\n $GREEN*$BLUE Start service systemd-resolved $RESETCOLOR${RESETCOLOR}"
+	systemctl start systemd-resolved
 }
 
 
@@ -116,11 +118,8 @@ function startSurf {
 
 	#set dns redirect
 	echo -e " $GREEN+$BLUE Redirecting DNS traffic through tor${RESETCOLOR}"
-	/usr/sbin/iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports 9053
+	/usr/sbin/iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports $DNS_PORT
 
-	# /usr/sbin/iptables -t nat -A OUTPUT -p TCP --dport 53 -j DNAT --to-destination 127.0.0.1:9053
-    # /usr/sbin/iptables -t nat -A OUTPUT -p UDP --dport 53 -j DNAT --to-destination 127.0.0.1:9053
-	
 	#resolve .onion domains mapping 10.192.0.0/10 address space
 	/usr/sbin/iptables -t nat -A OUTPUT -p tcp -d 10.192.0.0/10 -j REDIRECT --to-ports $TOR_PORT
 	/usr/sbin/iptables -t nat -A OUTPUT -p udp -d 10.192.0.0/10 -j REDIRECT --to-ports $TOR_PORT
@@ -231,7 +230,6 @@ echo -e "ExitNodes $(cat /tmp/Anon_country) StrictNodes 1" >> /etc/tor/torrc
 echo -e "EntryNodes $(cat /tmp/Anon_country) StrictNodes 1" >> /etc/tor/torrc
 
 rm /tmp/Anon_country
-
 systemctl reload tor
 }
 
