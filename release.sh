@@ -21,10 +21,7 @@ if [[ -n  $(cat /etc/os-release |  grep -i debian) || $(cat /etc/os-release |  g
         
         release=$(lsb_release -c | awk '{print $ 2}')
         
-        #Добавление ключей cloudfare "facal"
-        # echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/ focal main' | sudo tee /etc/apt/sources.list.d/cloudflare-main.list
-        # curl https://pkg.cloudflare.com/cloudflare-main.gpg -o /usr/share/keyrings/cloudflare-main.gpg
-
+        
     elif [[ -n  $(cat /etc/os-release |  grep -i ubuntu) ]]; then
 
         echo -e "\n $RED -------------"
@@ -76,7 +73,7 @@ elif [[ -n  $(cat /etc/os-release |  grep -i fedora) ]]; then
     yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
     dnf check-update
     dnf install tor bleachbit zenity obfs4proxy obfs4proxy libc6 nyx wget -y
-    dnf install libnotify-bin onioncircuits connect-proxy onionshare torsocks tor-geoipdb -y
+    dnf install  connect-proxy  torsocks tor-geoipdb -y
      
         if [ ! -f /etc/network/iptables.rules ]; then 
         mkdir /etc/network
@@ -102,7 +99,7 @@ elif [[ -n  $(cat /etc/os-release |  grep -i arch) ]]; then
     echo -e "\n$GREEN установка Тор\n$RESETCOLOR"
 
         sudo pacman -Sy --noconfirm tor torsocks bleachbit zenity  obfs4proxy libc6 nyx wget
-        sudo pacman -Sy --noconfirm libnotify-bin onioncircuits connect-proxy onionshare torsocks tor-geoipdb 
+        sudo pacman -Sy --noconfirm libnotify-bin  connect-proxy  torsocks tor-geoipdb 
 
         
         
