@@ -1,5 +1,5 @@
 
-Для рф данная утилита не подходит, т.к. РКН заблокировал Тор. Но имеется тестовая версия связки Tor(clent)+Reddocks(proxi/iptables)+snowflake(bridge)+cloudflared(dns), а подробнее: https://www.youtube.com/watch?v=ENc9Hm8u1xE
+Для рф данная утилита не подходит, т.к. РКН заблокировал Тор. Но имеется рабочая тестовая версия связки Tor(client)+Redsocks(proxi/iptables)+snowflake(bridge)+cloudflared(dns), а подробнее: https://www.youtube.com/watch?v=ENc9Hm8u1xE
 
 # anonsurf_GUI 2.0
 GUI for Anonsurf 2.0
